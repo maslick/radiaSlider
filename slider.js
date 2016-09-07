@@ -35,8 +35,6 @@ var radialSlider  = function (id) {
         context.strokeStyle = '#87CEEB';
         context.arc(x0, y0, radius, startAngle, endAngle, counterClockwise);
         context.lineWidth = 35;
-        
-        context.shadowBlur = 2;
         context.stroke();
         document.getElementById('value').innerHTML = Math.round(ang_degrees);
     };
