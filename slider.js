@@ -51,24 +51,20 @@ var radialSlider  = function (id) {
     };
 
     function _handleMouseDown() {
-        //console.log("mouse down");
         the_body.addEventListener('mousemove', _rotation, false);
     }
 
     function _handleMouseUp() {
-        //console.log("mouse up");
         the_body.removeEventListener('mousemove', _rotation, false);
     }
 
     function _handleClick(event) {
-        //console.log("mouse click");
         _rotation();
     }
 
     function _handleTouch(event) {
         event.preventDefault();
         _rotation();
-        the_body.addEventListener('touchmove', _rotation, false);
     }
 
     function _handleMove(event) {
