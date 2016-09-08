@@ -17,10 +17,10 @@ var radialSlider  = function (id) {
         click,
         ang_degrees,
         min,
-        max;
+        max,
+        x,y;
 
     var draw = function() {
-        //console.log("drawing..");
         context.clearRect(0, 0, slider.width, slider.height);
 
         // Scale
@@ -32,10 +32,21 @@ var radialSlider  = function (id) {
 
         // Data
         context.beginPath();
-        context.strokeStyle = '#87CEEB';
+        context.strokeStyle = '#104b63';
         context.arc(x0, y0, radius, startAngle, endAngle, counterClockwise);
         context.lineWidth = 35;
         context.stroke();
+
+        // Knob
+        context.beginPath();
+        context.strokeStyle = '#eb879c';
+        context.arc(Math.cos(endAngle)*radius + w2,Math.sin(endAngle)*radius + h2,10,0,Math.PI*2,true);
+        context.lineWidth = 15;
+        context.fillStyle = 'yellow';
+        context.fill();
+        context.stroke();
+
+        // Set value field
         document.getElementById('value').innerHTML = Math.round(ang_degrees);
     };
 
@@ -80,6 +91,16 @@ var radialSlider  = function (id) {
         slider.addEventListener('touchend', _handleEnd, false);
     }
 
+    function _rotation() {
+        x = event.layerX;
+        y = event.layerY;
+
+        endAngle = Math.atan2(y-h2, x-w2);
+        ang_degrees = (endAngle + Math.PI / 2 > 0 ? endAngle + Math.PI / 2 : (2 * Math.PI + endAngle + Math.PI / 2)) * 360 / (2 * Math.PI);
+        ang_degrees = ang_degrees * (max - min) / 360 + Math.round(min);
+        draw();
+    }
+
     function _init(id, options) {
         the_body = document.body;
         slider = document.getElementById(id);
@@ -95,20 +116,9 @@ var radialSlider  = function (id) {
         click = true;
         min = slider.dataset.min || 0;
         max = slider.dataset.max || 100;
-        console.log("Min: " + min + ", max: " + max);
         ang_degrees = min;
         draw();
         _setEventBindings();
-    }
-
-    function _rotation() {
-        var x = event.layerX;
-        var y = event.layerY;
-
-        endAngle = Math.atan2(y-h2, x-w2);
-        ang_degrees = (endAngle+Math.PI/2 > 0 ? endAngle+Math.PI/2 : (2 * Math.PI + endAngle+Math.PI/2)) * 360 / (2 * Math.PI);
-        ang_degrees = ang_degrees * (max - min) / 360 + Math.round(min);
-        draw();
     }
 
     _init(id);

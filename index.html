@@ -6,8 +6,8 @@
     <title></title>
 </head>
 <body>
-    <canvas id="myCanvas" width="200" height="200" data-max="360" data-min="0"></canvas>
-    <div>
+    <canvas id="myCanvas" width="200" height="200" data-max="360" data-min="0" class="unselectable"></canvas>
+    <div unselectable="on" class="unselectable">
         Value: <span id="value"></span>
     </div>
 </body>
@@ -21,12 +21,20 @@
     div {
         text-align: center;
     }
+
+    .unselectable {
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
 </style>
 
 
 <script src="slider.js"></script>
 <script>
-    var knob1 = new radialSlider("myCanvas");
+    var slider = new radialSlider("myCanvas");
 </script>
 
 </html>
