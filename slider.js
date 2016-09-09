@@ -106,6 +106,7 @@ function Slider(container) {
             self.drawData(obj);
             self.drawArrow(obj);
             self.drawKnob(obj);
+            obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
         }
     }
 
@@ -122,14 +123,23 @@ Slider.prototype.addSlider = function (options) {
         max: options.max || 100,
         radius: options.radius || 100,
         startAngle: this.startAngle,
-        endAngle: this.endAngle
+        endAngle: this.endAngle,
+        onValueChangeCallback: options.changed || function(v) {},
+        ang_degrees: 0,
+        normalizedValue: options.min || 0
     };
 
+    var obj = this.sliders[options.id];
+
     this.drawScale(this.sliders[options.id]);
-    this.sliders[options.id].endAngle = Math.PI;
+    obj.endAngle = 1.5*Math.PI + 0.000001;
     this.drawData(this.sliders[options.id]);
     this.drawArrow(this.sliders[options.id]);
     this.drawKnob(this.sliders[options.id]);
+
+
+
+    obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
 };
 
 Slider.prototype.drawScale = function(slider) {

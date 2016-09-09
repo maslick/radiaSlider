@@ -6,10 +6,18 @@
     <title></title>
 </head>
 <body>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
     <br><br>
     <div unselectable="on">
-        <span id="value"></span>
+        <span id="value1"></span>
+    </div>
+
+    <div unselectable="on">
+        <span id="value2"></span>
+    </div>
+
+    <div unselectable="on">
+        <span id="value3"></span>
     </div>
 </body>
 
@@ -29,10 +37,39 @@
 <script>
     
     var slider = new Slider("myCanvas");
-    slider.addSlider({id: 1, container: "myCanvas", radius: 80, color: "#104b63"});
-    slider.addSlider({id: 2, container: "myCanvas", radius: 130, color: "#ff9a9a"});
-    slider.addSlider({id: 3, container: "myCanvas", radius: 180, color: "#76c7e9"});
-    slider.addSlider({id: 4, container: "myCanvas", radius: 230, color: "#76c7e9"});
+    slider.addSlider({
+        id: 1,
+        container: "myCanvas",
+        radius: 50,
+        min: 0,
+        max: 200,
+        color: "#104b63",
+        changed: function (v) {
+            document.getElementById('value1').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
+        }
+    });
+    slider.addSlider({
+        id: 2,
+        container: "myCanvas",
+        radius: 90,
+        min: -10,
+        max: 100,
+        color: "#ff9a9a",
+        changed: function (v) {
+            document.getElementById('value2').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
+        }
+    });
+    slider.addSlider({
+        id: 3,
+        container: "myCanvas",
+        radius: 130,
+        min: 0,
+        max: 50,
+        color: "#76c7e9",
+        changed: function (v) {
+            document.getElementById('value3').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
+        }
+    });
 
 </script>
 
