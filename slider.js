@@ -1,4 +1,4 @@
-var radialSlider  = function (id) {
+var radialSlider  = function (id, options) {
     'use strict';
 
     var slider,
@@ -8,17 +8,18 @@ var radialSlider  = function (id) {
         x0,
         y0,
         radius,
-        w2,
-        h2,
-        counterClockwise,
-        startAngle = 1.5 * Math.PI + 0.000001,
+        startAngle,
         endAngle,
         customEvt,
         click,
         ang_degrees,
+        normalizedValue,
         min,
         max,
-        x,y;
+        x,
+        y,
+        onValueChangeCallback,
+        scaleWidth, knobWidth, fillWidth;
 
     var draw = function() {
         context.clearRect(0, 0, slider.width, slider.height);
@@ -26,31 +27,54 @@ var radialSlider  = function (id) {
         // Scale
         context.beginPath();
         context.strokeStyle = '#EEEEEE';
-        context.arc(x0, y0, radius, 1.5 * Math.PI + 0.00001, 1.5 * Math.PI - 0.00001, counterClockwise);
-        context.lineWidth = 35;
+        context.arc(x0, y0, radius, 0, 2*Math.PI, false);
+        context.lineWidth = scaleWidth;
         context.stroke();
 
         // Data
         context.beginPath();
         context.strokeStyle = '#104b63';
-        context.arc(x0, y0, radius, startAngle, endAngle, counterClockwise);
-        context.lineWidth = 35;
+        context.arc(x0, y0, radius, startAngle, endAngle, false);
+        context.lineWidth = fillWidth;
         context.stroke();
 
         // Knob
         context.beginPath();
         context.strokeStyle = '#eb879c';
-        context.arc(Math.cos(endAngle)*radius + w2,Math.sin(endAngle)*radius + h2,10,0,Math.PI*2,true);
-        context.lineWidth = 15;
+        context.arc(Math.cos(endAngle)*radius + x0,
+                    Math.sin(endAngle)*radius + y0,
+                    knobWidth/2,
+                    0,Math.PI*2,false);
+        context.lineWidth = 1;
+
+        context.fillStyle = '#eb879c';
+        context.fill();
+
+        // Dot on the knob
+        context.beginPath();
+        context.strokeStyle = 'yellow';
+        context.arc(Math.cos(endAngle)*radius + x0,
+                    Math.sin(endAngle)*radius + y0,
+                    scaleWidth/10,
+                    0,Math.PI*2,false);
+        context.lineWidth = 1;
         context.fillStyle = 'yellow';
         context.fill();
-        context.stroke();
 
-        // Set value field
-        document.getElementById('value').innerHTML = Math.round(ang_degrees);
+        // Dot in the center
+        context.beginPath();
+        context.strokeStyle = '#EEEEEE';
+        context.arc(x0, y0, radius/5,0,Math.PI*2,false);
+        context.lineWidth = 1;
+        context.fillStyle = '#EEEEEE';
+        context.fill();
+
+        // Callback
+        onValueChangeCallback({'rad': endAngle, 'deg': ang_degrees, 'value': normalizedValue});
     };
 
     function _handleMouseDown() {
+        event.preventDefault();
         the_body.addEventListener('mousemove', _rotation, false);
     }
 
@@ -91,9 +115,9 @@ var radialSlider  = function (id) {
         x = event.layerX;
         y = event.layerY;
 
-        endAngle = Math.atan2(y-h2, x-w2);
+        endAngle = Math.atan2(y-y0, x-y0);
         ang_degrees = (endAngle + Math.PI / 2 > 0 ? endAngle + Math.PI / 2 : (2 * Math.PI + endAngle + Math.PI / 2)) * 360 / (2 * Math.PI);
-        ang_degrees = ang_degrees * (max - min) / 360 + Math.round(min);
+        normalizedValue = ang_degrees * (max - min) / 360 + Math.round(min);
         draw();
     }
 
@@ -104,18 +128,28 @@ var radialSlider  = function (id) {
         x0 = slider.width / 2;
         y0 = slider.height / 2;
 
-        w2 = x0;
-        h2 = y0;
-        radius = w2*0.82;
-        counterClockwise = false;
+
+        scaleWidth = options.scaleWidth || 35;
+        fillWidth = options.fillWidth || 35;
+        knobWidth = options.knobWidth || scaleWidth;
+
+        radius = options.radius || 100*0.82;
+        startAngle = 1.5 * Math.PI + 0.000001,
         endAngle = 1.5 * Math.PI + 0.0001;
         click = true;
         min = slider.dataset.min || 0;
         max = slider.dataset.max || 100;
-        ang_degrees = min;
+        ang_degrees = normalizedValue = min;
+
+
+        onValueChangeCallback = options.change || function (v) {
+            document.getElementById('value').innerHTML = Math.round(v.angleDeg);
+        };
+
         draw();
         _setEventBindings();
+
     }
 
-    _init(id);
+    _init(id, options);
 };
