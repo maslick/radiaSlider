@@ -25,11 +25,18 @@ var radialSlider  = function (id, options) {
         context.clearRect(0, 0, slider.width, slider.height);
 
         // Scale
-        context.beginPath();
-        context.strokeStyle = '#EEEEEE';
-        context.arc(x0, y0, radius, 0, 2*Math.PI, false);
-        context.lineWidth = scaleWidth;
-        context.stroke();
+        //context.beginPath();
+        //context.strokeStyle = '#fbfbfb';
+        //context.arc(x0, y0, radius, 0, 2*Math.PI, false);
+        //context.lineWidth = scaleWidth;
+        //context.stroke();
+        for (var i = 0; i<= Math.PI*2; i+=Math.PI/24) {
+            context.beginPath();
+            context.strokeStyle = '#eeeeee';
+            context.arc(x0, y0, radius, i, i+0.1, false);
+            context.lineWidth = scaleWidth;
+            context.stroke();
+        }
 
         // Data
         context.beginPath();
@@ -137,8 +144,8 @@ var radialSlider  = function (id, options) {
         startAngle = 1.5 * Math.PI + 0.000001,
         endAngle = 1.5 * Math.PI + 0.0001;
         click = true;
-        min = slider.dataset.min || 0;
-        max = slider.dataset.max || 100;
+        min = options.min || 0;
+        max = options.max || 100;
         ang_degrees = normalizedValue = min;
 
 

@@ -6,7 +6,7 @@
     <title></title>
 </head>
 <body>
-    <canvas id="myCanvas" width="300" height="300" data-max="100" data-min="0"></canvas>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
     <div unselectable="on">
         <span id="value"></span>
     </div>
@@ -28,7 +28,9 @@
 <script>
 
     var options = {
-//        radius: 100,
+          min: 0,
+          max: 100,
+          radius: 100,
 //        scaleWidth: 15,
 //        fillWidth: 25,
 //        knobWidth: 35,
