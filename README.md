@@ -28,7 +28,7 @@ a simple pure JavaScript circular knob-style slider
     max: 30,
     color: "#104b63",
     changed: function (v) {
-      document.getElementById('value1').innerHTML = "Angle: " +v.deg + " deg, value: " + v.value;
+      document.getElementById('value1').innerHTML = "Angle: " + v.deg + " deg, value: " + v.value;
     }
   });
 </script>
