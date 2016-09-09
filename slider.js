@@ -57,13 +57,11 @@ function Slider(container) {
     }
 
     function _handleMouseUp() {
-        console.log("mouse up");
         self.the_body.removeEventListener('mousemove', _rotation, false);
         self.selectedSlider = null;
     }
 
     function _handleClick(event) {
-        console.log("clicked");
         self.selectedSlider = getSelectedSlider();
         if (self.selectedSlider) {
             _rotation();
@@ -88,7 +86,6 @@ function Slider(container) {
 
     function _rotation() {
         if (!self.selectedSlider) return;
-        console.log("rotating...");
         x = event.layerX;
         y = event.layerY;
 
