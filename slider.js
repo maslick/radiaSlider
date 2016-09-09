@@ -19,21 +19,17 @@ var radialSlider  = function (id, options) {
         x,
         y,
         onValueChangeCallback,
-        scaleWidth, knobWidth, fillWidth;
+        scaleWidth, knobWidth, fillWidth,
+        hip;
 
     var draw = function() {
         context.clearRect(0, 0, slider.width, slider.height);
 
         // Scale
-        //context.beginPath();
-        //context.strokeStyle = '#fbfbfb';
-        //context.arc(x0, y0, radius, 0, 2*Math.PI, false);
-        //context.lineWidth = scaleWidth;
-        //context.stroke();
-        for (var i = 0; i<= Math.PI*2; i+=Math.PI/24) {
+        for (var i = 0; i<= Math.PI*2; i+=Math.PI/30) {
             context.beginPath();
             context.strokeStyle = '#eeeeee';
-            context.arc(x0, y0, radius, i, i+0.1, false);
+            context.arc(x0, y0, radius, i, i+Math.PI/35, false);
             context.lineWidth = scaleWidth;
             context.stroke();
         }
@@ -82,6 +78,12 @@ var radialSlider  = function (id, options) {
 
     function _handleMouseDown() {
         event.preventDefault();
+        hip = Math.sqrt(Math.pow(event.layerX - x0, 2) + Math.pow(event.layerY - y0, 2));
+
+        if (Math.abs(hip-radius)>=scaleWidth/2) {
+            return;
+        }
+
         the_body.addEventListener('mousemove', _rotation, false);
     }
 
@@ -90,11 +92,19 @@ var radialSlider  = function (id, options) {
     }
 
     function _handleClick(event) {
+        hip = Math.sqrt(Math.pow(event.layerX - x0, 2) + Math.pow(event.layerY - y0, 2));
+        if (Math.abs(hip-radius)>=scaleWidth/2) {
+            return;
+        }
         _rotation();
     }
 
     function _handleTouch(event) {
         event.preventDefault();
+        hip = Math.sqrt(Math.pow(event.layerX - x0, 2) + Math.pow(event.layerY - y0, 2));
+        if (Math.abs(hip-radius)>=scaleWidth/2) {
+            return;
+        }
         _rotation();
     }
 
