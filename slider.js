@@ -33,6 +33,7 @@ function Slider(container) {
 
     this.container.addEventListener('touchstart', _handleTouch, false);
     this.container.addEventListener('touchmove', _handleMove, false);
+    this.container.addEventListener('touchend', _handleEnd, false);
 
     function getSelectedSlider() {
         var hip = Math.sqrt(Math.pow(event.layerX - self.x0, 2) + Math.pow(event.layerY - self.y0, 2));
@@ -80,6 +81,11 @@ function Slider(container) {
     function _handleMove(event) {
         event.preventDefault();
         _rotation();
+    }
+
+    function _handleEnd(event) {
+        event.preventDefault();
+        self.the_body.removeEventListener('mousemove', _rotation, false);
     }
 
 
