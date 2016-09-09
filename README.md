@@ -1,8 +1,10 @@
 # =radiaSlider=
 a simple pure JavaScript circular knob-style slider
 
+![alt tag](screenshot.png?raw=true "radioSlider")
+
 ```
- * works on mobile and tablets
+ * works on desktop, mobile and tablets
  * minified ~4 Kb
 ```
 ###usage
@@ -30,11 +32,7 @@ a simple pure JavaScript circular knob-style slider
     }
   });
 </script>
-
-
 ```
-
-![alt tag](screenshot.png?raw=true "radioSlider")
 
 ###demo 
 http://maslick.neocities.org/slider/
