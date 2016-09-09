@@ -8,15 +8,15 @@
 <body>
     <canvas id="myCanvas" width="300" height="300"></canvas>
     <br><br>
-    <div unselectable="on">
+    <div unselectable="on" style="background: #104b63;">
         <span id="value1"></span>
     </div>
 
-    <div unselectable="on">
+    <div unselectable="on" style="background: #ff9a9a;">
         <span id="value2"></span>
     </div>
 
-    <div unselectable="on">
+    <div unselectable="on" style="background: #76c7e9;">
         <span id="value3"></span>
     </div>
 </body>
@@ -25,10 +25,16 @@
     html {
         display: table;
         margin: 0 auto;
+        text-align: center;
     }
 
     div {
-        text-align: center;
+        color: white;
+        border-radius: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 200px;
+        margin: 5px auto;
     }
 </style>
 
