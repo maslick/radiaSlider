@@ -25,6 +25,7 @@ function Slider(container) {
     this.y0 = y0;
 
     this.selectedSlider = null;
+    this.currentSlider = null;
 
     var self = this;
     this.container.addEventListener('mousedown', _handleMouseDown, false);
@@ -59,11 +60,13 @@ function Slider(container) {
 
     function _handleMouseUp() {
         self.the_body.removeEventListener('mousemove', _rotation, false);
-        self.selectedSlider = null;
+        self.currentSlider = self.selectedSlider;
     }
 
     function _handleClick(event) {
-        self.selectedSlider = getSelectedSlider();
+        if (self.currentSlider && getSelectedSlider() && self.currentSlider.id != getSelectedSlider().id) {
+            return;
+        }
         if (self.selectedSlider) {
             _rotation();
         }
