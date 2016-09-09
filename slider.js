@@ -10,8 +10,6 @@ var radialSlider  = function (id, options) {
         radius,
         startAngle,
         endAngle,
-        customEvt,
-        click,
         ang_degrees,
         normalizedValue,
         min,
@@ -26,10 +24,10 @@ var radialSlider  = function (id, options) {
         context.clearRect(0, 0, slider.width, slider.height);
 
         // Scale
-        for (var i = 0; i<= Math.PI*2; i+=Math.PI/30) {
+        for (var i = 0; i<= Math.PI*2; i+=Math.PI/20) {
             context.beginPath();
             context.strokeStyle = '#eeeeee';
-            context.arc(x0, y0, radius, i, i+Math.PI/35, false);
+            context.arc(x0, y0, radius, i, i+Math.PI/25, false);
             context.lineWidth = scaleWidth;
             context.stroke();
         }
@@ -40,6 +38,14 @@ var radialSlider  = function (id, options) {
         context.arc(x0, y0, radius, startAngle, endAngle, false);
         context.lineWidth = fillWidth;
         context.stroke();
+
+        // Arrow
+        context.beginPath();
+        context.moveTo(x0,y0 - radius + scaleWidth/2);
+        context.lineTo(x0,y0-scaleWidth - radius + scaleWidth/2);
+        context.lineTo(x0+scaleWidth/2.6,y0-scaleWidth/2 - radius + scaleWidth/2);
+        context.fillStyle = "#eeeeee";
+        context.fill();
 
         // Knob
         context.beginPath();
@@ -67,7 +73,7 @@ var radialSlider  = function (id, options) {
         // Dot in the center
         context.beginPath();
         context.strokeStyle = '#EEEEEE';
-        context.arc(x0, y0, radius/5,0,Math.PI*2,false);
+        context.arc(x0, y0, scaleWidth/2, 0, Math.PI*2, false);
         context.lineWidth = 1;
         context.fillStyle = '#EEEEEE';
         context.fill();
@@ -153,7 +159,6 @@ var radialSlider  = function (id, options) {
         radius = options.radius || 100*0.82;
         startAngle = 1.5 * Math.PI + 0.000001,
         endAngle = 1.5 * Math.PI + 0.0001;
-        click = true;
         min = options.min || 0;
         max = options.max || 100;
         ang_degrees = normalizedValue = min;
