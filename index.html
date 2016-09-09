@@ -39,7 +39,7 @@
 </style>
 
 
-<script src="slider.js"></script>
+<script src="slider-min.js"></script>
 <script>
     
     var slider = new Slider("myCanvas");
@@ -48,7 +48,7 @@
         container: "myCanvas",
         radius: 50,
         min: 0,
-        max: 200,
+        max: 30,
         color: "#104b63",
         changed: function (v) {
             document.getElementById('value1').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
@@ -58,7 +58,7 @@
         id: 2,
         container: "myCanvas",
         radius: 90,
-        min: -10,
+        min: -100,
         max: 100,
         color: "#ff9a9a",
         changed: function (v) {
@@ -69,8 +69,8 @@
         id: 3,
         container: "myCanvas",
         radius: 130,
-        min: 0,
-        max: 50,
+        min: -500,
+        max: 500,
         color: "#76c7e9",
         changed: function (v) {
             document.getElementById('value3').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
