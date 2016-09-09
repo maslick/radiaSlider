@@ -6,7 +6,8 @@
     <title></title>
 </head>
 <body>
-    <canvas id="myCanvas" width="300" height="300"></canvas>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <br><br>
     <div unselectable="on">
         <span id="value"></span>
     </div>
@@ -24,21 +25,14 @@
 </style>
 
 
-<script src="slider-min.js"></script>
+<script src="slider.js"></script>
 <script>
+    
+    var slider = new Slider("myCanvas");
+    slider.addSlider({id: 1, container: "myCanvas", radius: 80});
+    slider.addSlider({id: 2, container: "myCanvas", radius: 150});
+    slider.addSlider({id: 3, container: "myCanvas", radius: 200});
 
-    var options = {
-          min: 0,
-          max: 100,
-          radius: 100,
-//        scaleWidth: 15,
-//        fillWidth: 25,
-//        knobWidth: 35,
-        change: function (v) {
-            document.getElementById('value').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
-        }
-    };
-    var slider = new radialSlider("myCanvas", options);
 </script>
 
 </html>

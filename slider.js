@@ -1,117 +1,82 @@
-var radialSlider  = function (id, options) {
-    'use strict';
+function Slider(container) {
+    var container = document.getElementById(container);
+    var the_body = document.body;
+    var context = container.getContext('2d');
+    var x0 = container.width / 2;
+    var y0 = container.height / 2;
+    var scaleWidth = 35;
+    var fillWidth = 35;
+    var knobWidth = 35;
+    var startAngle = 1.5 * Math.PI + 0.000001;
+    var endAngle = 1.5 * Math.PI + 0.0001;
 
-    var slider,
-        the_body,
-        canvas,
-        context,
-        x0,
-        y0,
-        radius,
-        startAngle,
-        endAngle,
-        ang_degrees,
-        normalizedValue,
-        min,
-        max,
-        x,
-        y,
-        onValueChangeCallback,
-        scaleWidth, knobWidth, fillWidth,
-        hip;
+    this.sliders = {};
+    this.scaleWidth = scaleWidth;
+    this.fillWidth = fillWidth;
+    this.knobWidth = knobWidth;
 
-    var draw = function() {
-        context.clearRect(0, 0, slider.width, slider.height);
+    this.startAngle = startAngle;
+    this.endAngle = endAngle;
 
-        // Scale
-        for (var i = 0; i<= Math.PI*2; i+=Math.PI/20) {
-            context.beginPath();
-            context.strokeStyle = '#eeeeee';
-            context.arc(x0, y0, radius, i, i+Math.PI/25, false);
-            context.lineWidth = scaleWidth;
-            context.stroke();
+    this.container = container;
+    this.the_body = the_body;
+    this.context = context;
+    this.x0 = x0;
+    this.y0 = y0;
+
+    this.selectedSlider = null;
+
+    var self = this;
+    this.container.addEventListener('mousedown', _handleMouseDown, false);
+    self.the_body.addEventListener('mouseup', _handleMouseUp, false);
+    this.container.addEventListener('click', _handleClick, false);
+
+    this.container.addEventListener('touchstart', _handleTouch, false);
+    this.container.addEventListener('touchmove', _handleMove, false);
+
+    function getSelectedSlider() {
+        var hip = Math.sqrt(Math.pow(event.layerX - self.x0, 2) + Math.pow(event.layerY - self.y0, 2));
+
+        for (var key in self.sliders) {
+            if (!self.sliders.hasOwnProperty(key)) continue;
+            var obj = self.sliders[key];
+            if (Math.abs(hip - obj.radius) <= self.scaleWidth / 2) {
+                var selectedSlider = obj;
+                break;
+            }
         }
+        return selectedSlider ? selectedSlider : null;
+    }
 
-        // Data
-        context.beginPath();
-        context.strokeStyle = '#104b63';
-        context.arc(x0, y0, radius, startAngle, endAngle, false);
-        context.lineWidth = fillWidth;
-        context.stroke();
-
-        // Arrow
-        context.beginPath();
-        context.moveTo(x0,y0 - radius + scaleWidth/2);
-        context.lineTo(x0,y0-scaleWidth - radius + scaleWidth/2);
-        context.lineTo(x0+scaleWidth/2.6,y0-scaleWidth/2 - radius + scaleWidth/2);
-        context.fillStyle = "#eeeeee";
-        context.fill();
-
-        // Knob
-        context.beginPath();
-        context.strokeStyle = '#eb879c';
-        context.arc(Math.cos(endAngle)*radius + x0,
-                    Math.sin(endAngle)*radius + y0,
-                    knobWidth/2,
-                    0,Math.PI*2,false);
-        context.lineWidth = 1;
-
-        context.fillStyle = '#eb879c';
-        context.fill();
-
-        // Dot on the knob
-        context.beginPath();
-        context.strokeStyle = 'yellow';
-        context.arc(Math.cos(endAngle)*radius + x0,
-                    Math.sin(endAngle)*radius + y0,
-                    scaleWidth/10,
-                    0,Math.PI*2,false);
-        context.lineWidth = 1;
-        context.fillStyle = 'yellow';
-        context.fill();
-
-        // Dot in the center
-        context.beginPath();
-        context.strokeStyle = '#EEEEEE';
-        context.arc(x0, y0, scaleWidth/2, 0, Math.PI*2, false);
-        context.lineWidth = 1;
-        context.fillStyle = '#EEEEEE';
-        context.fill();
-
-        // Callback
-        onValueChangeCallback({'rad': endAngle, 'deg': ang_degrees, 'value': normalizedValue});
-    };
-
-    function _handleMouseDown() {
+    function _handleMouseDown(event){
         event.preventDefault();
-        hip = Math.sqrt(Math.pow(event.layerX - x0, 2) + Math.pow(event.layerY - y0, 2));
-
-        if (Math.abs(hip-radius)>=scaleWidth/2) {
-            return;
+        self.selectedSlider = getSelectedSlider();
+        if (self.selectedSlider) {
+            self.the_body.addEventListener('mousemove', _rotation, false);
         }
-
-        the_body.addEventListener('mousemove', _rotation, false);
     }
 
     function _handleMouseUp() {
-        the_body.removeEventListener('mousemove', _rotation, false);
+        console.log("mouse up");
+        self.the_body.removeEventListener('mousemove', _rotation, false);
+        self.selectedSlider = null;
     }
 
     function _handleClick(event) {
-        hip = Math.sqrt(Math.pow(event.layerX - x0, 2) + Math.pow(event.layerY - y0, 2));
-        if (Math.abs(hip-radius)>=scaleWidth/2) {
-            return;
+        console.log("clicked");
+        self.selectedSlider = getSelectedSlider();
+        if (self.selectedSlider) {
+            _rotation();
         }
-        _rotation();
     }
+
 
     function _handleTouch(event) {
         event.preventDefault();
-        hip = Math.sqrt(Math.pow(event.layerX - x0, 2) + Math.pow(event.layerY - y0, 2));
-        if (Math.abs(hip-radius)>=scaleWidth/2) {
-            return;
+        self.selectedSlider = getSelectedSlider();
+        if (self.selectedSlider) {
+            _rotation();
         }
-        _rotation();
     }
 
     function _handleMove(event) {
@@ -119,59 +84,119 @@ var radialSlider  = function (id, options) {
         _rotation();
     }
 
-    function _handleEnd(event) {
-        event.preventDefault();
-        the_body.removeEventListener('mousemove', _rotation, false);
-    }
 
-    function _setEventBindings() {
-        slider.addEventListener('mousedown', _handleMouseDown, false);
-        the_body.addEventListener('mouseup', _handleMouseUp, false);
-        slider.addEventListener('click', _handleClick, false);
-
-        slider.addEventListener('touchstart', _handleTouch, false);
-        slider.addEventListener('touchmove', _handleMove, false);
-        slider.addEventListener('touchend', _handleEnd, false);
-    }
 
     function _rotation() {
+        if (!self.selectedSlider) return;
+        console.log("rotating...");
         x = event.layerX;
         y = event.layerY;
 
-        endAngle = Math.atan2(y-y0, x-y0);
-        ang_degrees = (endAngle + Math.PI / 2 > 0 ? endAngle + Math.PI / 2 : (2 * Math.PI + endAngle + Math.PI / 2)) * 360 / (2 * Math.PI);
-        normalizedValue = ang_degrees * (max - min) / 360 + Math.round(min);
+        self.selectedSlider.endAngle = Math.atan2(y-self.y0, x-self.y0);
+        self.selectedSlider.ang_degrees = (self.selectedSlider.endAngle + Math.PI / 2 > 0 ? self.selectedSlider.endAngle + Math.PI / 2 : (2 * Math.PI + self.selectedSlider.endAngle + Math.PI / 2)) * 360 / (2 * Math.PI);
+        self.selectedSlider.normalizedValue = self.selectedSlider.ang_degrees * (self.selectedSlider.max - self.selectedSlider.min) / 360 + Math.round(self.selectedSlider.min);
+
         draw();
     }
 
-    function _init(id, options) {
-        the_body = document.body;
-        slider = document.getElementById(id);
-        context = slider.getContext('2d');
-        x0 = slider.width / 2;
-        y0 = slider.height / 2;
+    function draw() {
+        self.context.clearRect(0, 0, self.container.width, self.container.height);
 
-
-        scaleWidth = options.scaleWidth || 35;
-        fillWidth = options.fillWidth || 35;
-        knobWidth = options.knobWidth || scaleWidth;
-
-        radius = options.radius || 100*0.82;
-        startAngle = 1.5 * Math.PI + 0.000001,
-        endAngle = 1.5 * Math.PI + 0.0001;
-        min = options.min || 0;
-        max = options.max || 100;
-        ang_degrees = normalizedValue = min;
-
-
-        onValueChangeCallback = options.change || function (v) {
-            document.getElementById('value').innerHTML = Math.round(v.angleDeg);
-        };
-
-        draw();
-        _setEventBindings();
-
+        for (var key in self.sliders) {
+            if (!self.sliders.hasOwnProperty(key)) continue;
+            var obj = self.sliders[key];
+            self.drawScale(obj);
+            self.drawData(obj);
+            self.drawArrow(obj);
+            self.drawKnob(obj);
+        }
     }
 
-    _init(id, options);
+
+};
+
+
+Slider.prototype.addSlider = function (options) {
+    this.sliders[options.id] = {
+        id: options.id,
+        container: document.getElementById(options.container),
+        color: options.color || '#104b63',
+        min: options.min || 0,
+        max: options.max || 100,
+        radius: options.radius || 100,
+        startAngle: this.startAngle,
+        endAngle: this.endAngle
+    };
+
+    this.drawScale(this.sliders[options.id]);
+    this.sliders[options.id].endAngle = Math.PI;
+    this.drawData(this.sliders[options.id]);
+    this.drawArrow(this.sliders[options.id]);
+    this.drawKnob(this.sliders[options.id]);
+};
+
+Slider.prototype.drawScale = function(slider) {
+    var context = slider.container.getContext('2d');
+    // Scale
+    for (var i = 0; i <= Math.PI * 2; i += Math.PI / 6) {
+        context.beginPath();
+        context.strokeStyle = '#eeeeee';
+        context.arc(this.x0, this.y0, slider.radius, i, i + Math.PI / 6, false);
+        context.lineWidth = this.scaleWidth;
+        context.stroke();
+    }
+    // Dot in the center
+    context.beginPath();
+    context.strokeStyle = '#eeeeee';
+    context.arc(this.x0, this.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    context.lineWidth = 1;
+    context.fillStyle = '#eeeeee';
+    context.fill();
+};
+
+Slider.prototype.drawData = function(slider) {
+    // Data
+    var context = slider.container.getContext('2d');
+    context.beginPath();
+    context.strokeStyle = slider.color;
+    context.arc(this.x0, this.y0, slider.radius, slider.startAngle, slider.endAngle, false);
+    context.lineWidth = this.fillWidth;
+    context.stroke();
+};
+
+Slider.prototype.drawArrow = function(slider) {
+    // Arrow
+    var context = slider.container.getContext('2d');
+    context.beginPath();
+    context.moveTo(this.x0, this.y0 - slider.radius + this.scaleWidth / 2);
+    context.lineTo(this.x0, this.y0 - this.scaleWidth - slider.radius + this.scaleWidth / 2);
+    context.lineTo(this.x0 + this.scaleWidth / 4, this.y0 - this.scaleWidth / 2 - slider.radius + this.scaleWidth / 2);
+    context.fillStyle = "#eeeeee";
+    context.fill();
+};
+
+Slider.prototype.drawKnob = function(slider) {
+    // Knob
+    var context = slider.container.getContext('2d');
+    context.beginPath();
+    context.strokeStyle = '#eb879c';
+    context.arc(Math.cos(slider.endAngle)*slider.radius + this.x0,
+        Math.sin(slider.endAngle)*slider.radius + this.y0,
+        this.knobWidth/2,
+        0,Math.PI*2,false);
+    context.lineWidth = 1;
+
+    context.fillStyle = '#eb879c';
+    context.fill();
+
+    // Dot on the knob
+    context.beginPath();
+    context.strokeStyle = 'yellow';
+    context.arc(Math.cos(slider.endAngle)*slider.radius + this.x0,
+        Math.sin(slider.endAngle)*slider.radius + this.y0,
+        this.scaleWidth/10,
+        0,Math.PI*2,false);
+    context.lineWidth = 1;
+    context.fillStyle = 'yellow';
+    context.fill();
 };
