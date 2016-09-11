@@ -8,16 +8,16 @@ a simple pure JavaScript circular knob-style slider
  * minified ~4 Kb
 ```
 ###quickstart
-import js
+- import js
 ```
 <script src="slider-min.js"></script>
 ```
-create canvas and value field
+- create a canvas and the value field
 ```
 <canvas id="myCanvas" width="300" height="300"></canvas>
 <span id="value1"></span>
 ```
-initialize slider
+ - initialize a slider
 ```
 <script>
   var slider = new Slider("myCanvas");
@@ -36,7 +36,7 @@ initialize slider
 </script>
 ```
 
-if you want to change the value programmatically, use:
+- if you want to change the value programmatically, use:
 ```
 slider.setSliderValue(1, 25);
 ```
