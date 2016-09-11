@@ -38,7 +38,7 @@ a simple pure JavaScript circular knob-style slider
 
 - if you want to change the value programmatically, use:
 ```
-slider.setSliderValue(1, 25);
+slider.setSliderValue(<sliderId>, <value>);
 ```
 
 
