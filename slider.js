@@ -8,7 +8,7 @@ function Slider(container) {
     var fillWidth = 35;
     var knobWidth = 35;
     var startAngle = 1.5 * Math.PI + 0.000001;
-    var endAngle = 1.5 * Math.PI + 0.0001;
+    var endAngle = 1.5 * Math.PI - 0.000001;
 
     this.sliders = {};
     this.scaleWidth = scaleWidth;
@@ -67,9 +67,7 @@ function Slider(container) {
             return;
         }
         if (self.selectedSlider) {
-            //self.clicked = true;
             _rotation();
-            //self.clicked = false;
         }
     }
 
@@ -95,21 +93,7 @@ function Slider(container) {
         x = event.layerX;
         y = event.layerY;
         self.calculateAngles(x, y);
-        draw();
-    }
-
-    function draw() {
-        self.context.clearRect(0, 0, self.container.width, self.container.height);
-
-        for (var key in self.sliders) {
-            if (!self.sliders.hasOwnProperty(key)) continue;
-            var obj = self.sliders[key];
-            self.drawScale(obj);
-            self.drawData(obj);
-            self.drawArrow(obj);
-            self.drawKnob(obj);
-            obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
-        }
+        self.drawAll();
     }
 }
 
@@ -131,15 +115,9 @@ Slider.prototype.addSlider = function (options) {
     };
 
     var obj = this.sliders[options.id];
-    obj.da = Math.abs(2*Math.PI*obj.step/(obj.max-obj.min));
+    //obj.da = Math.abs(2*Math.PI*obj.step/(obj.max-obj.min));
 
-    this.drawScale(this.sliders[options.id]);
-    obj.endAngle = 1.5*Math.PI + 0.000001;
-    this.drawData(this.sliders[options.id]);
-    this.drawArrow(this.sliders[options.id]);
-    this.drawKnob(this.sliders[options.id]);
-
-    obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
+    this.setSliderValue(obj.id, options.min);
 };
 
 Slider.prototype.drawScale = function(slider) {
@@ -230,4 +208,39 @@ Slider.prototype.radToDeg = function (ang) {
 Slider.prototype.normalizeTan = function (ang) {
     var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
     return rads;
+};
+
+Slider.prototype.setSliderValue = function (id, value) {
+    var slider = this.sliders[id];
+    if (value <= slider.min) {
+        slider.endAngle = this.startAngle;
+        slider.ang_degrees = 0;
+        slider.normalizedValue = 0;
+    }
+    else if (value >= slider.max) {
+        slider.endAngle = this.endAngle;
+        slider.ang_degrees = 360;
+        slider.normalizedValue = slider.max;
+    }
+    else {
+        //value = (value / slider.step >> 0) * slider.step;
+        slider.endAngle = 2 * Math.PI * (value - slider.min) / (slider.max - slider.min) - Math.PI/2;
+        slider.ang_degrees = this.radToDeg(this.normalizeTan(slider.endAngle));
+        slider.normalizedValue = value;
+    }
+
+    this.drawAll();
+};
+
+Slider.prototype.drawAll = function () {
+    this.context.clearRect(0, 0, this.container.width, this.container.height);
+    for (var key in this.sliders) {
+        if (!this.sliders.hasOwnProperty(key)) continue;
+        var obj = this.sliders[key];
+        this.drawScale(obj);
+        this.drawData(obj);
+        this.drawArrow(obj);
+        this.drawKnob(obj);
+        obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
+    }
 };

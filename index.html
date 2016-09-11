@@ -68,6 +68,7 @@
             document.getElementById('value1').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
         }
     });
+    slider.setSliderValue(1, 34);
     slider.addSlider({
         id: 2,
         container: "myCanvas",
@@ -80,6 +81,7 @@
             document.getElementById('value2').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
         }
     });
+    slider.setSliderValue(2, 70);
     slider.addSlider({
         id: 3,
         container: "myCanvas",
@@ -92,6 +94,7 @@
             document.getElementById('value3').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
         }
     });
+    slider.setSliderValue(3, 307);
 
     var slider2 = new Slider("myCanvas2");
     slider2.addSlider({
