@@ -24,6 +24,9 @@ function Slider(container) {
     this.x0 = x0;
     this.y0 = y0;
 
+    this.MouseX = 0;
+    this.MouseY = 0;
+
     this.selectedSlider = null;
     this.currentSlider = null;
 
@@ -37,19 +40,8 @@ function Slider(container) {
     this.container.addEventListener('touchend', _handleEnd, false);
 
     function getSelectedSlider() {
-        var rect = self.container.getBoundingClientRect();
-
-        var x,y;
-        if (event.touches) {
-            x = event.touches[0].clientX - rect.left;
-            y = event.touches[0].clientY - rect.top;
-        }
-        else {
-            x = event.clientX - rect.left;
-            y = event.clientY - rect.top;
-        }
-
-        var hip = Math.sqrt(Math.pow(x - self.x0, 2) + Math.pow(y - self.y0, 2));
+        self.calculateUserCursor();
+        var hip = Math.sqrt(Math.pow(self.MouseX - self.x0, 2) + Math.pow(self.MouseY - self.y0, 2));
 
         for (var key in self.sliders) {
             if (!self.sliders.hasOwnProperty(key)) continue;
@@ -93,7 +85,9 @@ function Slider(container) {
 
     function _handleMove(event) {
         event.preventDefault();
-        _rotation();
+        if (self.selectedSlider) {
+            _rotation();
+        }
     }
 
     function _handleEnd(event) {
@@ -102,17 +96,8 @@ function Slider(container) {
     }
 
     function _rotation() {
-        var rect = self.container.getBoundingClientRect();
-        var x,y;
-        if (event.touches) {
-            x = event.touches[0].clientX - rect.left;
-            y = event.touches[0].clientY - rect.top;
-        }
-        else {
-            x = event.clientX - rect.left;
-            y = event.clientY - rect.top;
-        }
-        self.calculateAngles(x, y);
+        self.calculateUserCursor();
+        self.calculateAngles(self.MouseX, self.MouseY);
         self.drawAll();
     }
 }
@@ -262,5 +247,18 @@ Slider.prototype.drawAll = function () {
         this.drawArrow(obj);
         this.drawKnob(obj);
         obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
+    }
+};
+
+Slider.prototype.calculateUserCursor = function () {
+    var rect = this.container.getBoundingClientRect();
+
+    if (event.touches) {
+        this.MouseX = event.touches[0].clientX - rect.left;
+        this.MouseY = event.touches[0].clientY - rect.top;
+    }
+    else {
+        this.MouseX = event.clientX - rect.left;
+        this.MouseY = event.clientY - rect.top;
     }
 };
