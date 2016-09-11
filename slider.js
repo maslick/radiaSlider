@@ -77,9 +77,7 @@ function Slider(container) {
         event.preventDefault();
         self.selectedSlider = getSelectedSlider();
         if (self.selectedSlider) {
-            //self.clicked = true;
             _rotation();
-            //self.clicked = false;
         }
     }
 
@@ -211,9 +209,18 @@ Slider.prototype.drawKnob = function(slider) {
 };
 
 Slider.prototype.calculateAngles = function (x, y) {
-    this.selectedSlider.endAngle = Math.atan2(y-this.y0, x-this.y0);
-    this.selectedSlider.ang_degrees = this.normalizeTan(this.selectedSlider.endAngle);
-    this.selectedSlider.normalizedValue = this.selectedSlider.ang_degrees * (this.selectedSlider.max - this.selectedSlider.min) / 360 + this.selectedSlider.min;
+    var max = this.selectedSlider.max,
+        min = this.selectedSlider.min,
+        step = this.selectedSlider.step,
+        endAngle = Math.atan2(y-this.y0, x-this.y0),
+        ang_degrees = this.radToDeg(this.normalizeTan(endAngle)),
+        normalizedValue = this.normalizeTan(endAngle) * (max - min) / (2 * Math.PI) + min;
+
+    normalizedValue = (normalizedValue / step >> 0) * step;
+
+    this.selectedSlider.endAngle = endAngle;
+    this.selectedSlider.ang_degrees = ang_degrees;
+    this.selectedSlider.normalizedValue = normalizedValue;
 };
 
 Slider.prototype.radToDeg = function (ang) {
@@ -222,5 +229,5 @@ Slider.prototype.radToDeg = function (ang) {
 
 Slider.prototype.normalizeTan = function (ang) {
     var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
-    return this.radToDeg(rads);
+    return rads;
 };
