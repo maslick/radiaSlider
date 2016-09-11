@@ -53,9 +53,8 @@ function Slider(container) {
     function _handleMouseDown(event){
         event.preventDefault();
         self.selectedSlider = getSelectedSlider();
-        if (self.selectedSlider) {
-            self.the_body.addEventListener('mousemove', _rotation, false);
-        }
+        if (!self.selectedSlider) return;
+        self.the_body.addEventListener('mousemove', _rotation, false);
     }
 
     function _handleMouseUp() {
@@ -68,16 +67,19 @@ function Slider(container) {
             return;
         }
         if (self.selectedSlider) {
+            //self.clicked = true;
             _rotation();
+            //self.clicked = false;
         }
     }
-
 
     function _handleTouch(event) {
         event.preventDefault();
         self.selectedSlider = getSelectedSlider();
         if (self.selectedSlider) {
+            //self.clicked = true;
             _rotation();
+            //self.clicked = false;
         }
     }
 
@@ -91,17 +93,10 @@ function Slider(container) {
         self.the_body.removeEventListener('mousemove', _rotation, false);
     }
 
-
-
     function _rotation() {
-        if (!self.selectedSlider) return;
         x = event.layerX;
         y = event.layerY;
-
-        self.selectedSlider.endAngle = Math.atan2(y-self.y0, x-self.y0);
-        self.selectedSlider.ang_degrees = (self.selectedSlider.endAngle + Math.PI / 2 > 0 ? self.selectedSlider.endAngle + Math.PI / 2 : (2 * Math.PI + self.selectedSlider.endAngle + Math.PI / 2)) * 360 / (2 * Math.PI);
-        self.selectedSlider.normalizedValue = self.selectedSlider.ang_degrees * (self.selectedSlider.max - self.selectedSlider.min) / 360 + Math.round(self.selectedSlider.min);
-
+        self.calculateAngles(x, y);
         draw();
     }
 
@@ -118,9 +113,7 @@ function Slider(container) {
             obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
         }
     }
-
-
-};
+}
 
 
 Slider.prototype.addSlider = function (options) {
@@ -135,18 +128,18 @@ Slider.prototype.addSlider = function (options) {
         endAngle: this.endAngle,
         onValueChangeCallback: options.changed || function(v) {},
         ang_degrees: 0,
-        normalizedValue: options.min || 0
+        normalizedValue: options.min || 0,
+        step: options.step || 1
     };
 
     var obj = this.sliders[options.id];
+    obj.da = Math.abs(2*Math.PI*obj.step/(obj.max-obj.min));
 
     this.drawScale(this.sliders[options.id]);
     obj.endAngle = 1.5*Math.PI + 0.000001;
     this.drawData(this.sliders[options.id]);
     this.drawArrow(this.sliders[options.id]);
     this.drawKnob(this.sliders[options.id]);
-
-
 
     obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
 };
@@ -215,4 +208,19 @@ Slider.prototype.drawKnob = function(slider) {
     context.lineWidth = 1;
     context.fillStyle = 'yellow';
     context.fill();
+};
+
+Slider.prototype.calculateAngles = function (x, y) {
+    this.selectedSlider.endAngle = Math.atan2(y-this.y0, x-this.y0);
+    this.selectedSlider.ang_degrees = this.normalizeTan(this.selectedSlider.endAngle);
+    this.selectedSlider.normalizedValue = this.selectedSlider.ang_degrees * (this.selectedSlider.max - this.selectedSlider.min) / 360 + this.selectedSlider.min;
+};
+
+Slider.prototype.radToDeg = function (ang) {
+    return ang * 180 / Math.PI;
+};
+
+Slider.prototype.normalizeTan = function (ang) {
+    var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
+    return this.radToDeg(rads);
 };

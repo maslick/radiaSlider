@@ -26,6 +26,7 @@ a simple pure JavaScript circular knob-style slider
     radius: 50,
     min: 0,
     max: 30,
+    step: 5,
     color: "#104b63",
     changed: function (v) {
       document.getElementById('value1').innerHTML = "Angle: " + v.deg + " deg, value: " + v.value;

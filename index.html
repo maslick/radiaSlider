@@ -19,6 +19,19 @@
     <div unselectable="on" style="background: #76c7e9;">
         <span id="value3"></span>
     </div>
+
+    <br>
+    <br>
+    <canvas id="myCanvas2" width="300" height="300"></canvas>
+    <div unselectable="on" style="background: #76c7e9;">
+        <span id="value4"></span>
+    </div>
+
+    <div unselectable="on" style="background: #ff9a9a;">
+        <span id="value5"></span>
+    </div>
+    <br><br>
+
 </body>
 
 <style>
@@ -32,14 +45,14 @@
         color: white;
         border-radius: 7px;
         padding: 5px 5px;
-        width: 240px;
+        width: 280px;
         margin: 5px auto;
         font-family: monospace;
     }
 </style>
 
 
-<script src="slider-min.js"></script>
+<script src="slider.js"></script>
 <script>
     
     var slider = new Slider("myCanvas");
@@ -47,11 +60,12 @@
         id: 1,
         container: "myCanvas",
         radius: 50,
-        min: 0,
-        max: 30,
+        min: -50,
+        max: 50,
         color: "#104b63",
+        step: 1,
         changed: function (v) {
-            document.getElementById('value1').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
+            document.getElementById('value1').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
         }
     });
     slider.addSlider({
@@ -61,19 +75,48 @@
         min: -100,
         max: 100,
         color: "#ff9a9a",
+        step: 1,
         changed: function (v) {
-            document.getElementById('value2').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
+            document.getElementById('value2').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
         }
     });
     slider.addSlider({
         id: 3,
         container: "myCanvas",
         radius: 130,
-        min: -500,
-        max: 500,
+        min: 0,
+        max: 360,
+        color: "#76c7e9",
+        step: 1,
+        changed: function (v) {
+            document.getElementById('value3').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
+        }
+    });
+
+    var slider2 = new Slider("myCanvas2");
+    slider2.addSlider({
+        id: 1,
+        container: "myCanvas2",
+        radius: 90,
+        min: 0,
+        max: 30,
+        step: 3,
         color: "#76c7e9",
         changed: function (v) {
-            document.getElementById('value3').innerHTML = "Angle: " + Math.round(v.deg) + " deg, value: " + Math.round(v.value);
+            document.getElementById('value4').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
+        }
+    });
+
+    slider2.addSlider({
+        id: 3,
+        container: "myCanvas2",
+        radius: 130,
+        min: -500,
+        max: 500,
+        step: 10,
+        color: "#ff9a9a",
+        changed: function (v) {
+            document.getElementById('value5').innerHTML = "Angle: " + v.deg.toFixed(2) + " deg, value: " + v.value.toFixed(2);
         }
     });
 
