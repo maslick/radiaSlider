@@ -37,7 +37,19 @@ function Slider(container) {
     this.container.addEventListener('touchend', _handleEnd, false);
 
     function getSelectedSlider() {
-        var hip = Math.sqrt(Math.pow(event.layerX - self.x0, 2) + Math.pow(event.layerY - self.y0, 2));
+        var rect = self.container.getBoundingClientRect();
+
+        var x,y;
+        if (event.touches) {
+            x = event.touches[0].clientX - rect.left;
+            y = event.touches[0].clientY - rect.top;
+        }
+        else {
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top;
+        }
+
+        var hip = Math.sqrt(Math.pow(x - self.x0, 2) + Math.pow(y - self.y0, 2));
 
         for (var key in self.sliders) {
             if (!self.sliders.hasOwnProperty(key)) continue;
@@ -90,8 +102,16 @@ function Slider(container) {
     }
 
     function _rotation() {
-        x = event.layerX;
-        y = event.layerY;
+        var rect = self.container.getBoundingClientRect();
+        var x,y;
+        if (event.touches) {
+            x = event.touches[0].clientX - rect.left;
+            y = event.touches[0].clientY - rect.top;
+        }
+        else {
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top;
+        }
         self.calculateAngles(x, y);
         self.drawAll();
     }
