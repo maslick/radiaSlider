@@ -5,7 +5,7 @@ a simple pure JavaScript circular knob-style slider
 
 ```
  * works on desktop, mobile and tablets
- * minified ~4 Kb
+ * minified ~5 Kb
 ```
 ###quickstart
 - import js

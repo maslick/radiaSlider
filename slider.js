@@ -1,28 +1,18 @@
-function Slider(container) {
-    var container = document.getElementById(container);
-    var the_body = document.body;
-    var context = container.getContext('2d');
-    var x0 = container.width / 2;
-    var y0 = container.height / 2;
-    var scaleWidth = 35;
-    var fillWidth = 35;
-    var knobWidth = 35;
-    var startAngle = 1.5 * Math.PI + 0.000001;
-    var endAngle = 1.5 * Math.PI - 0.000001;
+function Slider(canvasId) {
 
     this.sliders = {};
-    this.scaleWidth = scaleWidth;
-    this.fillWidth = fillWidth;
-    this.knobWidth = knobWidth;
+    this.scaleWidth = 35;
+    this.fillWidth = 35;
+    this.knobWidth = 35;
 
-    this.startAngle = startAngle;
-    this.endAngle = endAngle;
+    this.startAngle = 1.5 * Math.PI + 0.000001;
+    this.endAngle = 1.5 * Math.PI - 0.000001;
 
-    this.container = container;
-    this.the_body = the_body;
-    this.context = context;
-    this.x0 = x0;
-    this.y0 = y0;
+    this.container = document.getElementById(canvasId);
+    this.the_body = document.body;
+    this.context = this.container.getContext('2d');
+    this.x0 = this.container.width / 2;
+    this.y0 = this.container.height / 2;
 
     this.MouseX = 0;
     this.MouseY = 0;
@@ -30,79 +20,20 @@ function Slider(container) {
     this.selectedSlider = null;
     this.currentSlider = null;
 
-    var self = this;
-    this.container.addEventListener('mousedown', _handleMouseDown, false);
-    self.the_body.addEventListener('mouseup', _handleMouseUp, false);
-    this.container.addEventListener('click', _handleClick, false);
+    this.rotationEventListener = this._rotation.bind(this);
+    this.container.addEventListener('mousedown', this._handleMouseDown.bind(this), false);
+    this.the_body.addEventListener('mouseup', this._handleMouseUp.bind(this), false);
+    this.container.addEventListener('click', this._handleClick.bind(this), false);
 
-    this.container.addEventListener('touchstart', _handleTouch, false);
-    this.container.addEventListener('touchmove', _handleMove, false);
-    this.container.addEventListener('touchend', _handleEnd, false);
 
-    function getSelectedSlider() {
-        self.calculateUserCursor();
-        var hip = Math.sqrt(Math.pow(self.MouseX - self.x0, 2) + Math.pow(self.MouseY - self.y0, 2));
+    this.container.addEventListener('touchstart', this._handleTouch.bind(this), false);
+    this.container.addEventListener('touchmove', this._handleMove.bind(this), false);
+    this.container.addEventListener('touchend', this._handleEnd.bind(this), false);
 
-        for (var key in self.sliders) {
-            if (!self.sliders.hasOwnProperty(key)) continue;
-            var obj = self.sliders[key];
-            if (Math.abs(hip - obj.radius) <= self.scaleWidth / 2) {
-                var selectedSlider = obj;
-                break;
-            }
-        }
-        return selectedSlider ? selectedSlider : null;
-    }
-
-    function _handleMouseDown(event){
-        event.preventDefault();
-        self.selectedSlider = getSelectedSlider();
-        if (!self.selectedSlider) return;
-        self.the_body.addEventListener('mousemove', _rotation, false);
-    }
-
-    function _handleMouseUp() {
-        self.the_body.removeEventListener('mousemove', _rotation, false);
-        self.currentSlider = self.selectedSlider;
-    }
-
-    function _handleClick(event) {
-        if (self.currentSlider && getSelectedSlider() && self.currentSlider.id != getSelectedSlider().id) {
-            return;
-        }
-        if (self.selectedSlider) {
-            _rotation();
-        }
-    }
-
-    function _handleTouch(event) {
-        event.preventDefault();
-        self.selectedSlider = getSelectedSlider();
-        if (self.selectedSlider) {
-            _rotation();
-        }
-    }
-
-    function _handleMove(event) {
-        event.preventDefault();
-        if (self.selectedSlider) {
-            _rotation();
-        }
-    }
-
-    function _handleEnd(event) {
-        event.preventDefault();
-        self.the_body.removeEventListener('mousemove', _rotation, false);
-    }
-
-    function _rotation() {
-        self.calculateUserCursor();
-        self.calculateAngles(self.MouseX, self.MouseY);
-        self.drawAll();
-    }
 }
 
 
+// Adds a slider band to the slider
 Slider.prototype.addSlider = function (options) {
     this.sliders[options.id] = {
         id: options.id,
@@ -125,6 +56,8 @@ Slider.prototype.addSlider = function (options) {
     this.setSliderValue(obj.id, options.min);
 };
 
+
+// Draw the scale for a selected slider band
 Slider.prototype.drawScale = function(slider) {
     var context = slider.container.getContext('2d');
     // Scale
@@ -135,6 +68,12 @@ Slider.prototype.drawScale = function(slider) {
         context.lineWidth = this.scaleWidth;
         context.stroke();
     }
+
+};
+
+// Draw dot in the center
+Slider.prototype.drawCenterDot = function () {
+    var context = this.container.getContext('2d');
     // Dot in the center
     context.beginPath();
     context.strokeStyle = '#eeeeee';
@@ -144,6 +83,7 @@ Slider.prototype.drawScale = function(slider) {
     context.fill();
 };
 
+// Draw the data on the selected slider band
 Slider.prototype.drawData = function(slider) {
     // Data
     var context = slider.container.getContext('2d');
@@ -154,6 +94,7 @@ Slider.prototype.drawData = function(slider) {
     context.stroke();
 };
 
+// Draw tail arrow
 Slider.prototype.drawArrow = function(slider) {
     // Arrow
     var context = slider.container.getContext('2d');
@@ -165,6 +106,7 @@ Slider.prototype.drawArrow = function(slider) {
     context.fill();
 };
 
+// Draw the knob (control element)
 Slider.prototype.drawKnob = function(slider) {
     // Knob
     var context = slider.container.getContext('2d');
@@ -191,6 +133,7 @@ Slider.prototype.drawKnob = function(slider) {
     context.fill();
 };
 
+// Calculate angles given the cursor position
 Slider.prototype.calculateAngles = function (x, y) {
     var max = this.selectedSlider.max,
         min = this.selectedSlider.min,
@@ -206,15 +149,18 @@ Slider.prototype.calculateAngles = function (x, y) {
     this.selectedSlider.normalizedValue = normalizedValue;
 };
 
+// Helper method
 Slider.prototype.radToDeg = function (ang) {
     return ang * 180 / Math.PI;
 };
 
+// Normilizes tangent
 Slider.prototype.normalizeTan = function (ang) {
     var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
     return rads;
 };
 
+// Sets (draws) slider band value given the band id and value
 Slider.prototype.setSliderValue = function (id, value) {
     var slider = this.sliders[id];
     if (value <= slider.min) {
@@ -237,6 +183,7 @@ Slider.prototype.setSliderValue = function (id, value) {
     this.drawAll();
 };
 
+// Redraws everything
 Slider.prototype.drawAll = function () {
     this.context.clearRect(0, 0, this.container.width, this.container.height);
     for (var key in this.sliders) {
@@ -248,8 +195,10 @@ Slider.prototype.drawAll = function () {
         this.drawKnob(obj);
         obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
     }
+    this.drawCenterDot();
 };
 
+// Calculates cursor coordinates
 Slider.prototype.calculateUserCursor = function () {
     var rect = this.container.getBoundingClientRect();
 
@@ -261,4 +210,76 @@ Slider.prototype.calculateUserCursor = function () {
         this.MouseX = event.clientX - rect.left;
         this.MouseY = event.clientY - rect.top;
     }
+};
+
+
+// Returns a slider band based on the cursor position
+Slider.prototype.getSelectedSlider = function () {
+    this.calculateUserCursor();
+    var hip = Math.sqrt(Math.pow(this.MouseX - this.x0, 2) + Math.pow(this.MouseY - this.y0, 2));
+
+    for (var key in this.sliders) {
+        if (!this.sliders.hasOwnProperty(key)) continue;
+        var obj = this.sliders[key];
+        if (Math.abs(hip - obj.radius) <= this.scaleWidth / 2) {
+            var selectedSlider = obj;
+            break;
+        }
+    }
+    return selectedSlider ? selectedSlider : null;
+};
+
+
+// Event handlers (mousedown, mouseup, mousemove, mouseclick, touches)
+Slider.prototype._handleMouseDown = function (event) {
+    event.preventDefault();
+    this.selectedSlider = this.getSelectedSlider();
+
+    if (!this.selectedSlider) return;
+
+    this.the_body.addEventListener('mousemove', this.rotationEventListener, false);
+};
+
+Slider.prototype._handleMouseUp = function (event) {
+    event.preventDefault();
+    this.the_body.removeEventListener('mousemove', this.rotationEventListener, false);
+
+    this.currentSlider = this.selectedSlider;
+};
+
+Slider.prototype._handleClick = function (event) {
+    this.selectedSlider = this.getSelectedSlider();
+
+    if (this.currentSlider && this.getSelectedSlider() && this.currentSlider.id != this.getSelectedSlider().id) {
+        return;
+    }
+    if (this.selectedSlider) {
+        this._rotation();
+    }
+};
+
+Slider.prototype._handleTouch = function (event) {
+    event.preventDefault();
+    this.selectedSlider = this.getSelectedSlider();
+    if (this.selectedSlider) {
+        this._rotation();
+    }
+};
+
+Slider.prototype._handleMove = function (event) {
+    event.preventDefault();
+    if (this.selectedSlider) {
+        this._rotation();
+    }
+};
+
+Slider.prototype._handleEnd = function (event) {
+    event.preventDefault();
+    this.the_body.removeEventListener('mousemove', this.rotationEventListener, false);
+};
+
+Slider.prototype._rotation = function () {
+    this.calculateUserCursor();
+    this.calculateAngles(this.MouseX, this.MouseY);
+    this.drawAll();
 };
