@@ -56,110 +56,6 @@ Slider.prototype.addSlider = function (options) {
     this.setSliderValue(obj.id, options.min);
 };
 
-
-// Draw the scale for a selected slider band
-Slider.prototype.drawScale = function(slider) {
-    var context = slider.container.getContext('2d');
-    // Scale
-    for (var i = 0; i <= Math.PI * 2; i += Math.PI / 6) {
-        context.beginPath();
-        context.strokeStyle = '#eeeeee';
-        context.arc(this.x0, this.y0, slider.radius, i, i + Math.PI / 6, false);
-        context.lineWidth = this.scaleWidth;
-        context.stroke();
-    }
-
-};
-
-// Draw dot in the center
-Slider.prototype.drawCenterDot = function () {
-    var context = this.container.getContext('2d');
-    // Dot in the center
-    context.beginPath();
-    context.strokeStyle = '#eeeeee';
-    context.arc(this.x0, this.y0, this.scaleWidth/2, 0, Math.PI*2, false);
-    context.lineWidth = 1;
-    context.fillStyle = '#eeeeee';
-    context.fill();
-};
-
-// Draw the data on the selected slider band
-Slider.prototype.drawData = function(slider) {
-    // Data
-    var context = slider.container.getContext('2d');
-    context.beginPath();
-    context.strokeStyle = slider.color;
-    context.arc(this.x0, this.y0, slider.radius, slider.startAngle, slider.endAngle, false);
-    context.lineWidth = this.fillWidth;
-    context.stroke();
-};
-
-// Draw tail arrow
-Slider.prototype.drawArrow = function(slider) {
-    // Arrow
-    var context = slider.container.getContext('2d');
-    context.beginPath();
-    context.moveTo(this.x0, this.y0 - slider.radius + this.scaleWidth / 2);
-    context.lineTo(this.x0, this.y0 - this.scaleWidth - slider.radius + this.scaleWidth / 2);
-    context.lineTo(this.x0 + this.scaleWidth / 4, this.y0 - this.scaleWidth / 2 - slider.radius + this.scaleWidth / 2);
-    context.fillStyle = "#eeeeee";
-    context.fill();
-};
-
-// Draw the knob (control element)
-Slider.prototype.drawKnob = function(slider) {
-    // Knob
-    var context = slider.container.getContext('2d');
-    context.beginPath();
-    context.strokeStyle = '#eb879c';
-    context.arc(Math.cos(slider.endAngle)*slider.radius + this.x0,
-        Math.sin(slider.endAngle)*slider.radius + this.y0,
-        this.knobWidth/2,
-        0,Math.PI*2,false);
-    context.lineWidth = 1;
-
-    context.fillStyle = '#eb879c';
-    context.fill();
-
-    // Dot on the knob
-    context.beginPath();
-    context.strokeStyle = 'yellow';
-    context.arc(Math.cos(slider.endAngle)*slider.radius + this.x0,
-        Math.sin(slider.endAngle)*slider.radius + this.y0,
-        this.scaleWidth/10,
-        0,Math.PI*2,false);
-    context.lineWidth = 1;
-    context.fillStyle = 'yellow';
-    context.fill();
-};
-
-// Calculate angles given the cursor position
-Slider.prototype.calculateAngles = function (x, y) {
-    var max = this.selectedSlider.max,
-        min = this.selectedSlider.min,
-        step = this.selectedSlider.step,
-        endAngle = Math.atan2(y-this.y0, x-this.y0),
-        ang_degrees = this.radToDeg(this.normalizeTan(endAngle)),
-        normalizedValue = this.normalizeTan(endAngle) * (max - min) / (2 * Math.PI) + min;
-
-    normalizedValue = (normalizedValue / step >> 0) * step;
-
-    this.selectedSlider.endAngle = endAngle;
-    this.selectedSlider.ang_degrees = ang_degrees;
-    this.selectedSlider.normalizedValue = normalizedValue;
-};
-
-// Helper method
-Slider.prototype.radToDeg = function (ang) {
-    return ang * 180 / Math.PI;
-};
-
-// Normilizes tangent
-Slider.prototype.normalizeTan = function (ang) {
-    var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
-    return rads;
-};
-
 // Sets (draws) slider band value given the band id and value
 Slider.prototype.setSliderValue = function (id, value) {
     var slider = this.sliders[id];
@@ -196,6 +92,101 @@ Slider.prototype.drawAll = function () {
         obj.onValueChangeCallback({'rad': obj.endAngle, 'deg': obj.ang_degrees, 'value': obj.normalizedValue});
     }
     this.drawCenterDot();
+};
+
+// Draw the scale for a selected slider band
+Slider.prototype.drawScale = function(slider) {
+    // Scale
+    for (var i = 0; i <= Math.PI * 2; i += Math.PI / 6) {
+        this.context.beginPath();
+        this.context.strokeStyle = '#eeeeee';
+        this.context.arc(this.x0, this.y0, slider.radius, i, i + Math.PI / 6, false);
+        this.context.lineWidth = this.scaleWidth;
+        this.context.stroke();
+    }
+
+};
+
+// Draw dot in the center
+Slider.prototype.drawCenterDot = function () {
+    this.context.beginPath();
+    this.context.strokeStyle = '#eeeeee';
+    this.context.arc(this.x0, this.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    this.context.lineWidth = 1;
+    this.context.fillStyle = '#eeeeee';
+    this.context.fill();
+};
+
+// Draw the data on the selected slider band
+Slider.prototype.drawData = function(slider) {
+    this.context.beginPath();
+    this.context.strokeStyle = slider.color;
+    this.context.arc(this.x0, this.y0, slider.radius, slider.startAngle, slider.endAngle, false);
+    this.context.lineWidth = this.fillWidth;
+    this.context.stroke();
+};
+
+// Draw tail arrow
+Slider.prototype.drawArrow = function(slider) {
+    this.context.beginPath();
+    this.context.moveTo(this.x0, this.y0 - slider.radius + this.scaleWidth / 2);
+    this.context.lineTo(this.x0, this.y0 - this.scaleWidth - slider.radius + this.scaleWidth / 2);
+    this.context.lineTo(this.x0 + this.scaleWidth / 4, this.y0 - this.scaleWidth / 2 - slider.radius + this.scaleWidth / 2);
+    this.context.fillStyle = "#eeeeee";
+    this.context.fill();
+};
+
+// Draw the knob (control element)
+Slider.prototype.drawKnob = function(slider) {
+    // Knob
+    this.context.beginPath();
+    this.context.strokeStyle = '#eb879c';
+    this.context.arc(Math.cos(slider.endAngle)*slider.radius + this.x0,
+        Math.sin(slider.endAngle)*slider.radius + this.y0,
+        this.knobWidth/2,
+        0,Math.PI*2,false);
+    this.context.lineWidth = 1;
+
+    this.context.fillStyle = '#eb879c';
+    this.context.fill();
+
+    // Dot on the knob
+    this.context.beginPath();
+    this.context.strokeStyle = 'yellow';
+    this.context.arc(Math.cos(slider.endAngle)*slider.radius + this.x0,
+        Math.sin(slider.endAngle)*slider.radius + this.y0,
+        this.scaleWidth/10,
+        0,Math.PI*2,false);
+    this.context.lineWidth = 1;
+    this.context.fillStyle = 'yellow';
+    this.context.fill();
+};
+
+// Calculate angles given the cursor position
+Slider.prototype.calculateAngles = function (x, y) {
+    var max = this.selectedSlider.max,
+        min = this.selectedSlider.min,
+        step = this.selectedSlider.step,
+        endAngle = Math.atan2(y-this.y0, x-this.y0),
+        ang_degrees = this.radToDeg(this.normalizeTan(endAngle)),
+        normalizedValue = this.normalizeTan(endAngle) * (max - min) / (2 * Math.PI) + min;
+
+    normalizedValue = (normalizedValue / step >> 0) * step;
+
+    this.selectedSlider.endAngle = endAngle;
+    this.selectedSlider.ang_degrees = ang_degrees;
+    this.selectedSlider.normalizedValue = normalizedValue;
+};
+
+// Helper method
+Slider.prototype.radToDeg = function (ang) {
+    return ang * 180 / Math.PI;
+};
+
+// Normilizes tangent
+Slider.prototype.normalizeTan = function (ang) {
+    var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
+    return rads;
 };
 
 // Calculates cursor coordinates
@@ -278,6 +269,7 @@ Slider.prototype._handleEnd = function (event) {
     this.the_body.removeEventListener('mousemove', this.rotationEventListener, false);
 };
 
+// Rotation wrapper
 Slider.prototype._rotation = function () {
     this.calculateUserCursor();
     this.calculateAngles(this.MouseX, this.MouseY);
