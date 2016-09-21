@@ -1,4 +1,4 @@
-function Slider(canvasId) {
+function Slider(canvasId, x0, y0) {
 
     this.sliders = {};
     this.scaleWidth = 35;
@@ -11,8 +11,9 @@ function Slider(canvasId) {
     this.container = document.getElementById(canvasId);
     this.the_body = document.body;
     this.context = this.container.getContext('2d');
-    this.x0 = this.container.width / 2;
-    this.y0 = this.container.height / 2;
+
+    this.x0 = x0 == undefined ? this.container.width / 2 : x0;
+    this.y0 = y0 == undefined ? this.container.height / 2 : y0;
 
     this.MouseX = 0;
     this.MouseY = 0;
@@ -167,7 +168,7 @@ Slider.prototype.calculateAngles = function (x, y) {
     var max = this.selectedSlider.max,
         min = this.selectedSlider.min,
         step = this.selectedSlider.step,
-        endAngle = Math.atan2(y-this.y0, x-this.y0),
+        endAngle = Math.atan2(y-this.y0, x-this.x0),
         ang_degrees = this.radToDeg(this.normalizeTan(endAngle)),
         normalizedValue = this.normalizeTan(endAngle) * (max - min) / (2 * Math.PI) + min;
 
