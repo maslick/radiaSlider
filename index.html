@@ -6,28 +6,36 @@
     <title></title>
 </head>
 <body>
-    <canvas id="myCanvas" width="300" height="300"></canvas>
+    <div class="canvass">
+        <canvas id="myCanvas" width="500" height="300"></canvas>
+    </div>
+
     <br><br>
-    <div unselectable="on" style="background: #76c7e9;">
+    <div unselectable="on" style="background: #76c7e9;" class="dashboard">
         <span id="value3"></span>
     </div>
 
-    <div unselectable="on" style="background: #ff9a9a;">
+    <div unselectable="on" style="background: #ff9a9a;" class="dashboard">
         <span id="value2"></span>
     </div>
 
-    <div unselectable="on" style="background: #104b63;">
+    <div unselectable="on" style="background: #104b63;" class="dashboard">
         <span id="value1"></span>
     </div>
 
     <br>
     <br>
-    <canvas id="myCanvas2" width="300" height="300"></canvas>
-    <div unselectable="on" style="background: #ff9a9a;">
+    <div class="canvass">
+        <canvas id="myCanvas2" width="300" height="300"></canvas>
+    </div>
+
+
+    <br><br>
+    <div unselectable="on" style="background: #ff9a9a;" class="dashboard">
         <span id="value5"></span>
     </div>
 
-    <div unselectable="on" style="background: #76c7e9;">
+    <div unselectable="on" style="background: #76c7e9;" class="dashboard">
         <span id="value4"></span>
     </div>
     <br><br>
@@ -37,11 +45,12 @@
 <style>
     html {
         display: table;
-        margin: 0 auto;
+        margin: 25px auto;
         text-align: center;
+
     }
 
-    div {
+    div.dashboard {
         color: white;
         border-radius: 7px;
         padding: 5px 5px;
@@ -49,10 +58,19 @@
         margin: 5px auto;
         font-family: monospace;
     }
+
+    div.canvass {
+        /*border: dashed 2px black;*/
+        /*box-shadow: 1px 1px 10px #efefef;*/
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+        padding: 25px;
+
+    }
 </style>
 
 
-<script src="slider-min.js"></script>
+<script src="slider.js"></script>
 <script>
     
     var slider = new Slider("myCanvas");
