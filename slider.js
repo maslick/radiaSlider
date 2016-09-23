@@ -6,6 +6,7 @@ function Slider(canvasId, continuousMode) {
     this.knobWidth = 35;
 
     this.continuousMode = continuousMode || false;
+    this.vertical = true;
 
     this.container = document.getElementById(canvasId);
     this.the_body = document.body;
@@ -78,22 +79,37 @@ Slider.prototype.drawAll = function () {
         var obj = this.sliders[key];
         this.drawScale(obj);
         this.drawData(obj);
-        //this.drawArrow(obj);
         this.drawKnob(obj);
         obj.onValueChangeCallback({'width': obj.value, 'value': obj.normalizedValue});
     }
-    //this.drawCenterDot();
 };
 
 // Draw the scale for a selected slider band
 Slider.prototype.drawScale = function(slider) {
+
+    // first rounded edge
+    this.context.beginPath();
+    this.context.strokeStyle = slider.color;
+    this.context.arc(slider.x0+1, slider.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    this.context.lineWidth = 1;
+    this.context.fillStyle = slider.color;
+    this.context.fill();
+
     // Scale
     this.context.beginPath();
     this.context.strokeStyle = '#eeeeee';
     this.context.moveTo(slider.x0, slider.y0);
-    this.context.lineTo(slider.x0+slider.width, slider.y0);
+    this.context.lineTo(slider.x0 + slider.width, slider.y0);
     this.context.lineWidth = this.scaleWidth;
     this.context.stroke();
+
+
+    // second rounded edge
+    this.context.strokeStyle = '#eeeeee';
+    this.context.arc(slider.x0 + slider.width, slider.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    this.context.lineWidth = 1;
+    this.context.fillStyle = '#eeeeee';
+    this.context.fill();
 };
 
 // Draw the data on the selected slider band
@@ -104,28 +120,6 @@ Slider.prototype.drawData = function(slider) {
     this.context.lineTo(slider.x0 + slider.value, slider.y0);
     this.context.lineWidth = this.fillWidth;
     this.context.stroke();
-
-
-};
-
-// Draw dot in the center
-Slider.prototype.drawCenterDot = function () {
-    this.context.beginPath();
-    this.context.strokeStyle = '#eeeeee';
-    this.context.arc(this.x0, this.y0, this.scaleWidth/2, 0, Math.PI*2, false);
-    this.context.lineWidth = 1;
-    this.context.fillStyle = '#eeeeee';
-    this.context.fill();
-};
-
-// Draw tail arrow
-Slider.prototype.drawArrow = function(slider) {
-    this.context.beginPath();
-    this.context.moveTo(slider.x0, slider.y0 - slider.width + this.scaleWidth / 2);
-    this.context.lineTo(slider.x0, slider.y0 - this.scaleWidth - slider.width + this.scaleWidth / 2);
-    this.context.lineTo(slider.x0 + this.scaleWidth / 4, slider.y0 - this.scaleWidth / 2 - slider.width + this.scaleWidth / 2);
-    this.context.fillStyle = "#eeeeee";
-    this.context.fill();
 };
 
 // Draw the knob (control element)
@@ -166,15 +160,17 @@ Slider.prototype.calculateValues = function (x, y) {
 
 
     var val = x - this.selectedSlider.x0;
-    if (val > this.selectedSlider.width) {
+    if (val > this.selectedSlider.width - this.selectedSlider.step) {
         val = this.selectedSlider.width;
     }
-    if (val < 0) {
+    if (val < 0 + this.selectedSlider.step) {
         val = 0;
     }
 
     var nomval = (val*(max-min))/(w) + min;
     nomval = (nomval/step >> 0) * step;
+
+    //val = (nomval - min) * w / (max - min);
 
     this.selectedSlider.value = val;
     this.selectedSlider.normalizedValue = nomval;
