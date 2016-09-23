@@ -1,4 +1,4 @@
-function Slider(canvasId, x0, y0) {
+function Slider(canvasId, contMode, x0, y0) {
 
     this.sliders = {};
     this.scaleWidth = 35;
@@ -7,6 +7,8 @@ function Slider(canvasId, x0, y0) {
 
     this.startAngle = 1.5 * Math.PI + 0.000001;
     this.endAngle = 1.5 * Math.PI - 0.000001;
+
+    this.continuousMode = contMode || false;
 
     this.container = document.getElementById(canvasId);
     this.the_body = document.body;
@@ -165,6 +167,8 @@ Slider.prototype.drawKnob = function(slider) {
 
 // Calculate angles given the cursor position
 Slider.prototype.calculateAngles = function (x, y) {
+    if (!this.selectedSlider) { return; }
+
     var max = this.selectedSlider.max,
         min = this.selectedSlider.min,
         step = this.selectedSlider.step,
@@ -260,8 +264,13 @@ Slider.prototype._handleTouch = function (event) {
 
 Slider.prototype._handleMove = function (event) {
     event.preventDefault();
-    if (this.selectedSlider) {
+    if (this.continuousMode) {
         this._rotation();
+    }
+    else {
+        if (this.selectedSlider) {
+            this._rotation();
+        }
     }
 };
 
@@ -273,6 +282,10 @@ Slider.prototype._handleEnd = function (event) {
 // Rotation wrapper
 Slider.prototype._rotation = function () {
     this.calculateUserCursor();
+    if (this.continuousMode) {
+        this.selectedSlider = this.getSelectedSlider();
+    }
+
     this.calculateAngles(this.MouseX, this.MouseY);
     this.drawAll();
 };
