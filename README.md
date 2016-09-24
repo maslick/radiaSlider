@@ -58,7 +58,7 @@ a simple pure JavaScript circular/linear knob-style slider
     changed: function (v) {
       document.getElementById('value1').innerHTML = "Width: " + v.width + " px, value: " + v.value;
     },
-    x0: 30
+    x0: 30,
     y0: 30
   });
 </script>
