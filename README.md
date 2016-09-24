@@ -4,7 +4,6 @@ a simple pure JavaScript circular/linear knob-style slider
 ![alt tag](screenshot.png?raw=true "radioSlider circular")
 
 ![alt tag](screenshot2.png?raw=true "radioSlider linear vertical")
-
 ![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")
 
 ```
@@ -72,4 +71,5 @@ slider.setSliderValue(<sliderId>, <value>);
 
 ###demo 
 http://maslick.neocities.org/slider/
+http://maslick.neocities.org/slider-linear/
 
