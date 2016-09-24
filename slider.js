@@ -1,4 +1,4 @@
-function Slider(canvasId, continuousMode) {
+function Slider(canvasId, continuousMode, vertical) {
 
     this.sliders = {};
     this.scaleWidth = 35;
@@ -6,7 +6,7 @@ function Slider(canvasId, continuousMode) {
     this.knobWidth = 35;
 
     this.continuousMode = continuousMode || false;
-    this.vertical = true;
+    this.vertical = vertical || false;
 
     this.container = document.getElementById(canvasId);
     this.the_body = document.body;
@@ -87,26 +87,36 @@ Slider.prototype.drawAll = function () {
 // Draw the scale for a selected slider band
 Slider.prototype.drawScale = function(slider) {
 
+
     // first rounded edge
     this.context.beginPath();
     this.context.strokeStyle = slider.color;
-    this.context.arc(slider.x0+1, slider.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    this.context.arc(slider.x0, slider.y0, this.scaleWidth/2, 0, Math.PI*2, false);
     this.context.lineWidth = 1;
     this.context.fillStyle = slider.color;
     this.context.fill();
 
+    var x1, y1;
+    if (this.vertical) {
+        x1 = slider.x0;
+        y1 = slider.y0 - slider.width;
+    }
+    else {
+        x1 = slider.x0 + slider.width;
+        y1 = slider.y0;
+    }
     // Scale
     this.context.beginPath();
     this.context.strokeStyle = '#eeeeee';
     this.context.moveTo(slider.x0, slider.y0);
-    this.context.lineTo(slider.x0 + slider.width, slider.y0);
+    this.context.lineTo(x1, y1);
     this.context.lineWidth = this.scaleWidth;
     this.context.stroke();
 
 
     // second rounded edge
     this.context.strokeStyle = '#eeeeee';
-    this.context.arc(slider.x0 + slider.width, slider.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    this.context.arc(x1, y1, this.scaleWidth/2, 0, Math.PI*2, false);
     this.context.lineWidth = 1;
     this.context.fillStyle = '#eeeeee';
     this.context.fill();
@@ -114,10 +124,20 @@ Slider.prototype.drawScale = function(slider) {
 
 // Draw the data on the selected slider band
 Slider.prototype.drawData = function(slider) {
+    var x1, y1;
+    if (this.vertical) {
+        x1 = slider.x0;
+        y1 = slider.y0 - slider.value;
+    }
+    else {
+        x1 = slider.x0 + slider.value;
+        y1 = slider.y0;
+    }
+
     this.context.beginPath();
     this.context.strokeStyle = slider.color;
     this.context.moveTo(slider.x0, slider.y0);
-    this.context.lineTo(slider.x0 + slider.value, slider.y0);
+    this.context.lineTo(x1, y1);
     this.context.lineWidth = this.fillWidth;
     this.context.stroke();
 };
@@ -125,10 +145,20 @@ Slider.prototype.drawData = function(slider) {
 // Draw the knob (control element)
 Slider.prototype.drawKnob = function(slider) {
     // Knob
+    var x1, y1;
+    if (this.vertical) {
+        x1 = slider.x0;
+        y1 = slider.y0 - slider.value;
+    }
+    else {
+        x1 = slider.x0 + slider.value;
+        y1 = slider.y0;
+    }
+
     this.context.beginPath();
     this.context.strokeStyle = '#eb879c';
-    this.context.arc(slider.value + slider.x0,
-        slider.y0,
+    this.context.arc(x1,
+        y1,
         this.knobWidth/2,
         0,Math.PI*2,false);
     this.context.lineWidth = 1;
@@ -139,8 +169,8 @@ Slider.prototype.drawKnob = function(slider) {
     // Dot on the knob
     this.context.beginPath();
     this.context.strokeStyle = 'yellow';
-    this.context.arc(slider.value + slider.x0,
-        slider.y0,
+    this.context.arc(x1,
+        y1,
         this.scaleWidth/10,
         0,Math.PI*2,false);
     this.context.lineWidth = 1;
@@ -153,13 +183,22 @@ Slider.prototype.calculateValues = function (x, y) {
     if (!this.selectedSlider) {
         return;
     }
+
     var max = this.selectedSlider.max,
         min = this.selectedSlider.min,
         step = this.selectedSlider.step,
         w = this.selectedSlider.width;
 
+    var x1;
+    if (this.vertical) {
+        x1 = this.selectedSlider.y0 - y;
+    }
+    else {
+        x1 = x - this.selectedSlider.x0;
+    }
 
-    var val = x - this.selectedSlider.x0;
+
+    var val = x1;
     if (val > this.selectedSlider.width - this.selectedSlider.step) {
         val = this.selectedSlider.width;
     }
@@ -198,13 +237,21 @@ Slider.prototype.getSelectedSlider = function () {
     for (var key in this.sliders) {
         if (!this.sliders.hasOwnProperty(key)) continue;
         var obj = this.sliders[key];
-        var xx = this.MouseX >= obj.x0 && this.MouseX <= obj.x0 + obj.width;
-        var yy = this.MouseY >= obj.y0 - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
+        if (this.vertical) {
+            var xx = this.MouseX >= obj.x0 - this.scaleWidth / 2 && this.MouseX <= obj.x0 + this.scaleWidth / 2;
+            var yy = this.MouseY >= obj.y0 - obj.width && this.MouseY <= obj.y0;
+        }
+        else {
+            var xx = this.MouseX >= obj.x0 && this.MouseX <= obj.x0 + obj.width;
+            var yy = this.MouseY >= obj.y0 - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
+        }
+
         if (xx && yy) {
             var selectedSlider = obj;
             break;
         }
     }
+
     return selectedSlider ? selectedSlider : null;
 };
 
