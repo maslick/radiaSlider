@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+    <br>
+    <div>1. horizontal (continuous mode ON)</div>
+    <canvas id="myCanvas0" width="320" height="300"></canvas>
+    <br>
+    <br>
+    <div>2. horizontal (continuous mode OFF)</div>
+    <canvas id="myCanvas1" width="320" height="300"></canvas>
+    <br><br>
+    <div>3. vertical (continuous mode ON)</div>
+    <canvas id="myCanvas2" width="320" height="270"></canvas>
+    <br><br>
+
+    <div>4. vertical (continuous mode OFF)</div>
+    <canvas id="myCanvas3" width="320" height="270"></canvas>
+    <br><br>
+
+</body>
+
+<style>
+    html {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    div {
+        color: #b3b3b3;
+        border-radius: 7px;
+        padding: 5px 5px;
+        width: 280px;
+        margin: 5px auto;
+        font-family: monospace;
+    }
+
+    canvas {
+        border: dashed 2px darkgrey;
+        border-radius: 15px;
+    }
+</style>
+
+
+<script src="slider-linear.js"></script>
+<script>
+
+    var colors = [
+        "#104b63",
+        "#ff9a9a",
+        "#76c7e9",
+        "#ffff9a",
+        "#9e9e9e",
+        "#bcf5bc",
+        "#f096f0"
+    ];
+
+    var temp = {
+        min: -100,
+        max: 100,
+        step: 10
+    };
+
+    function randomInRange(start,end){
+        return Math.floor(Math.random() * (end - start + 1) + start);
+    }
+
+    var slider0 = new Slider({canvasId: "myCanvas0",  continuousMode: true,  vertical: false});
+    var slider1 = new Slider({canvasId: "myCanvas1", continuousMode: false, vertical: false});
+    var slider2 = new Slider({canvasId: "myCanvas2", continuousMode: true,  vertical: true});
+    var slider3 = new Slider({canvasId: "myCanvas3", continuousMode: false, vertical: true});
+
+    for (var i=0; i<=6; i++) {
+        //horizontal sliders
+        var t = temp;
+        t.width = 260;
+        t.color = colors[i];
+        t.x0 = 30;
+        t.y0 = 30 + 40*i;
+        t.id = i;
+        slider0.addSlider(t);
+        slider0.setSliderValue(i, randomInRange(-100,100));
+
+        slider1.addSlider(t);
+        slider1.setSliderValue(i, randomInRange(-100,100));
+
+        //vertical sliders
+        t.width = 210;
+        t.x0 = 40 + 40*i;
+        t.y0 = 240;
+        slider2.addSlider(t);
+        slider2.setSliderValue(i, randomInRange(-100,100));
+
+        slider3.addSlider(t);
+        slider3.setSliderValue(i, randomInRange(-100,100));
+    }
+
+
+</script>
+
+</html>
