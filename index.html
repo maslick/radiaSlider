@@ -57,6 +57,9 @@
     <canvas id="myCanvas3" width="320" height="270"></canvas>
     <br>
     <br>
+    <canvas id="myCanvas4" width="320" height="270"></canvas>
+    <br>
+    <br>
     <br>
 
 </body>
@@ -90,7 +93,6 @@
     var slider = new Slider("myCanvas", true);
     slider.addSlider({
         id: 1,
-        container: "myCanvas",
         color: "#104b63",
         width: 260,
         min: -100,
@@ -105,7 +107,6 @@
     slider.setSliderValue(1, -50);
     slider.addSlider({
         id: 2,
-        container: "myCanvas",
         color: "#ff9a9a",
         width: 260,
         min: -100,
@@ -120,7 +121,6 @@
     slider.setSliderValue(2, 0);
     slider.addSlider({
         id: 3,
-        container: "myCanvas",
         color: "#76c7e9",
         width: 260,
         min: -100,
@@ -136,7 +136,6 @@
 
     slider.addSlider({
         id: 4,
-        container: "myCanvas",
         color: "#ffff9a",
         width: 260,
         min: -100,
@@ -152,7 +151,6 @@
 
     slider.addSlider({
         id: 5,
-        container: "myCanvas",
         color: "#9e9e9e",
         width: 260,
         min: -100,
@@ -168,7 +166,6 @@
 
     slider.addSlider({
         id: 6,
-        container: "myCanvas",
         color: "#bcf5bc",
         width: 260,
         min: -100,
@@ -188,7 +185,6 @@
     var slider2 = new Slider("myCanvas2");
     slider2.addSlider({
         id: 1,
-        container: "myCanvas2",
         color: "#104b63",
         width: 260,
         min: 0,
@@ -203,7 +199,6 @@
     slider2.setSliderValue(1, 25);
     slider2.addSlider({
         id: 2,
-        container: "myCanvas2",
         color: "#ff9a9a",
         width: 260,
         min: 0,
@@ -218,7 +213,6 @@
     slider2.setSliderValue(2, 50);
     slider2.addSlider({
         id: 3,
-        container: "myCanvas2",
         color: "#76c7e9",
         width: 260,
         min: 0,
@@ -234,7 +228,6 @@
 
     slider2.addSlider({
         id: 4,
-        container: "myCanvas2",
         color: "#9e9e9e",
         width: 260,
         min: 0,
@@ -254,7 +247,6 @@
     var slider3 = new Slider("myCanvas3", true, true);
     slider3.addSlider({
         id: 1,
-        container: "myCanvas3",
         color: "#104b63",
         width: 200,
         min: -100,
@@ -269,7 +261,6 @@
     slider3.setSliderValue(1, -50);
     slider3.addSlider({
         id: 2,
-        container: "myCanvas3",
         color: "#ff9a9a",
         width: 200,
         min: -100,
@@ -284,7 +275,6 @@
     slider3.setSliderValue(2, 0);
     slider3.addSlider({
         id: 3,
-        container: "myCanvas3",
         color: "#76c7e9",
         width: 200,
         min: -100,
@@ -300,7 +290,6 @@
 
     slider3.addSlider({
         id: 4,
-        container: "myCanvas3",
         color: "#ffff9a",
         width: 200,
         min: -100,
@@ -316,7 +305,6 @@
 
     slider3.addSlider({
         id: 5,
-        container: "myCanvas3",
         color: "#9e9e9e",
         width: 200,
         min: -100,
@@ -332,7 +320,7 @@
 
     slider3.addSlider({
         id: 6,
-        container: "myCanvas",
+
         color: "#bcf5bc",
         width: 200,
         min: -100,
@@ -348,7 +336,6 @@
 
     slider3.addSlider({
         id: 7,
-        container: "myCanvas",
         color: "#bcf5bc",
         width: 200,
         min: -100,
@@ -361,6 +348,114 @@
         }
     });
     slider3.setSliderValue(5, 100);
+
+
+
+    var slider4 = new Slider("myCanvas4", false, true);
+    slider4.addSlider({
+        id: 1,
+        color: "#104b63",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 10,
+        x0: 40,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value1').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(1, -50);
+    slider4.addSlider({
+        id: 2,
+        color: "#ff9a9a",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 5,
+        x0: 80,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value2').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(2, 0);
+    slider4.addSlider({
+        id: 3,
+        color: "#76c7e9",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 0.1,
+        x0: 120,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value3').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(3, 50);
+
+    slider4.addSlider({
+        id: 4,
+        color: "#ffff9a",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 0.1,
+        x0: 160,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value4').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(4, 100);
+
+    slider4.addSlider({
+        id: 5,
+        color: "#9e9e9e",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 0.1,
+        x0: 200,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value4').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(5, 100);
+
+    slider4.addSlider({
+        id: 6,
+        color: "#bcf5bc",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 0.1,
+        x0: 240,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value4').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(5, 100);
+
+    slider4.addSlider({
+        id: 7,
+        color: "#bcf5bc",
+        width: 200,
+        min: -100,
+        max: 100,
+        step: 0.1,
+        x0: 280,
+        y0: 240,
+        changed: function (v) {
+//            document.getElementById('value4').innerHTML = "Width: " + v.width.toFixed(2) + " px, value: " + v.value.toFixed(2);
+        }
+    });
+    slider4.setSliderValue(5, 100);
+
+
 
 </script>
 

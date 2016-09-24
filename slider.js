@@ -87,7 +87,6 @@ Slider.prototype.drawAll = function () {
 // Draw the scale for a selected slider band
 Slider.prototype.drawScale = function(slider) {
 
-
     // first rounded edge
     this.context.beginPath();
     this.context.strokeStyle = slider.color;
@@ -239,10 +238,10 @@ Slider.prototype.getSelectedSlider = function () {
         var obj = this.sliders[key];
         if (this.vertical) {
             var xx = this.MouseX >= obj.x0 - this.scaleWidth / 2 && this.MouseX <= obj.x0 + this.scaleWidth / 2;
-            var yy = this.MouseY >= obj.y0 - obj.width && this.MouseY <= obj.y0;
+            var yy = this.MouseY >= obj.y0 - obj.width - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
         }
         else {
-            var xx = this.MouseX >= obj.x0 && this.MouseX <= obj.x0 + obj.width;
+            var xx = this.MouseX >= obj.x0 - this.scaleWidth/2 && this.MouseX <= obj.x0 + obj.width + this.scaleWidth/2;
             var yy = this.MouseY >= obj.y0 - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
         }
 
