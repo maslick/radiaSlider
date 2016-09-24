@@ -86,11 +86,13 @@ Slider.prototype.drawAll = function () {
 
 // Draw the scale for a selected slider band
 Slider.prototype.drawScale = function(slider) {
+    var fix_x = this.vertical?0:1;
+    var fix_y = this.vertical?1:0;
 
     // first rounded edge
     this.context.beginPath();
     this.context.strokeStyle = slider.color;
-    this.context.arc(slider.x0, slider.y0, this.scaleWidth/2, 0, Math.PI*2, false);
+    this.context.arc(slider.x0 + fix_x, slider.y0 - fix_y, this.scaleWidth/2, 0, Math.PI*2, false);
     this.context.lineWidth = 1;
     this.context.fillStyle = slider.color;
     this.context.fill();
