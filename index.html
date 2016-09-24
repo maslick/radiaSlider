@@ -8,18 +8,18 @@
 <body>
     <br>
     <div>1. horizontal (continuous mode ON)</div>
-    <canvas id="myCanvas" width="320" height="270"></canvas>
+    <canvas id="myCanvas0" width="320" height="300"></canvas>
     <br>
     <br>
     <div>2. horizontal (continuous mode OFF)</div>
-    <canvas id="myCanvas2" width="320" height="270"></canvas>
+    <canvas id="myCanvas1" width="320" height="300"></canvas>
     <br><br>
     <div>3. vertical (continuous mode ON)</div>
-    <canvas id="myCanvas3" width="320" height="270"></canvas>
+    <canvas id="myCanvas2" width="320" height="270"></canvas>
     <br><br>
 
     <div>4. vertical (continuous mode OFF)</div>
-    <canvas id="myCanvas4" width="320" height="270"></canvas>
+    <canvas id="myCanvas3" width="320" height="270"></canvas>
     <br><br>
 
 </body>
@@ -49,324 +49,56 @@
 
 <script src="slider.js"></script>
 <script>
-    
-    var slider = new Slider({canvasId: "myCanvas", continuousMode: true, vertical: false});
-    slider.addSlider({
-        id: 1,
-        color: "#104b63",
-        width: 260,
+
+    var colors = [
+        "#104b63",
+        "#ff9a9a",
+        "#76c7e9",
+        "#ffff9a",
+        "#9e9e9e",
+        "#bcf5bc",
+        "#ff9a9a"
+    ];
+
+    var temp = {
         min: -100,
         max: 100,
-        step: 30,
-        x0: 30,
-        y0: 30
-    });
-    slider.setSliderValue(1, -50);
-    slider.addSlider({
-        id: 2,
-        color: "#ff9a9a",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 5,
-        x0: 30,
-        y0: 70
-    });
-    slider.setSliderValue(2, 0);
-    slider.addSlider({
-        id: 3,
-        color: "#76c7e9",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 110
-    });
-    slider.setSliderValue(3, 50);
+        step: 10
+    };
 
-    slider.addSlider({
-        id: 4,
-        color: "#ffff9a",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 150
-    });
-    slider.setSliderValue(4, 100);
+    function randomInRange(start,end){
+        return Math.floor(Math.random() * (end - start + 1) + start);
+    }
 
-    slider.addSlider({
-        id: 5,
-        color: "#9e9e9e",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 190
-    });
-    slider.setSliderValue(5, 100);
+    var slider0 = new Slider({canvasId: "myCanvas0",  continuousMode: true,  vertical: false});
+    var slider1 = new Slider({canvasId: "myCanvas1", continuousMode: false, vertical: false});
+    var slider2 = new Slider({canvasId: "myCanvas2", continuousMode: true,  vertical: true});
+    var slider3 = new Slider({canvasId: "myCanvas3", continuousMode: false, vertical: true});
 
-    slider.addSlider({
-        id: 6,
-        color: "#bcf5bc",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 230
-    });
-    slider.setSliderValue(5, 100);
+    for (var i=0; i<=6; i++) {
+        //horizontal sliders
+        var t = temp;
+        t.width = 260;
+        t.color = colors[i];
+        t.x0 = 30;
+        t.y0 = 30 + 40*i;
+        t.id = i;
+        slider0.addSlider(t);
+        slider0.setSliderValue(i, randomInRange(-100,100));
 
+        slider1.addSlider(t);
+        slider1.setSliderValue(i, randomInRange(-100,100));
 
+        //vertical sliders
+        t.width = 210;
+        t.x0 = 40 + 40*i;
+        t.y0 = 240;
+        slider2.addSlider(t);
+        slider2.setSliderValue(i, randomInRange(-100,100));
 
-
-    var slider2 = new Slider({canvasId: "myCanvas2", continuousMode: false, vertical: false});
-    slider2.addSlider({
-        id: 1,
-        color: "#104b63",
-        width: 260,
-        min: 0,
-        max: 100,
-        step: 1,
-        x0: 30,
-        y0: 30
-    });
-    slider2.setSliderValue(1, 25);
-    slider2.addSlider({
-        id: 2,
-        color: "#ff9a9a",
-        width: 260,
-        min: 0,
-        max: 100,
-        step: 5,
-        x0: 30,
-        y0: 70
-    });
-    slider2.setSliderValue(2, 50);
-    slider2.addSlider({
-        id: 3,
-        color: "#76c7e9",
-        width: 260,
-        min: 0,
-        max: 100,
-        step: 1,
-        x0: 30,
-        y0: 110
-    });
-    slider2.setSliderValue(3, 75);
-
-    slider2.addSlider({
-        id: 4,
-        color: "#9e9e9e",
-        width: 260,
-        min: 0,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 150
-    });
-    slider2.setSliderValue(4, 100);
-
-    slider2.addSlider({
-        id: 5,
-        color: "#9e9e9e",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 190
-    });
-    slider2.setSliderValue(5, 100);
-
-    slider2.addSlider({
-        id: 6,
-        color: "#bcf5bc",
-        width: 260,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 30,
-        y0: 230
-    });
-    slider2.setSliderValue(5, 100);
-
-
-
-
-    var slider3 = new Slider({canvasId: "myCanvas3", continuousMode: true, vertical: true});
-    slider3.addSlider({
-        id: 1,
-        color: "#104b63",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 10,
-        x0: 40,
-        y0: 240
-    });
-    slider3.setSliderValue(1, -50);
-    slider3.addSlider({
-        id: 2,
-        color: "#ff9a9a",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 5,
-        x0: 80,
-        y0: 240
-    });
-    slider3.setSliderValue(2, 0);
-    slider3.addSlider({
-        id: 3,
-        color: "#76c7e9",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 120,
-        y0: 240
-    });
-    slider3.setSliderValue(3, 50);
-
-    slider3.addSlider({
-        id: 4,
-        color: "#ffff9a",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 160,
-        y0: 240
-    });
-    slider3.setSliderValue(4, 100);
-
-    slider3.addSlider({
-        id: 5,
-        color: "#9e9e9e",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 200,
-        y0: 240
-    });
-    slider3.setSliderValue(5, 100);
-
-    slider3.addSlider({
-        id: 6,
-
-        color: "#bcf5bc",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 240,
-        y0: 240
-    });
-    slider3.setSliderValue(5, 100);
-
-    slider3.addSlider({
-        id: 7,
-        color: "#bcf5bc",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 280,
-        y0: 240
-    });
-    slider3.setSliderValue(5, 100);
-
-
-
-    var slider4 = new Slider({canvasId: "myCanvas4", continuousMode: false, vertical: true});
-    slider4.addSlider({
-        id: 1,
-        color: "#104b63",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 10,
-        x0: 40,
-        y0: 240
-    });
-    slider4.setSliderValue(1, -50);
-    slider4.addSlider({
-        id: 2,
-        color: "#ff9a9a",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 5,
-        x0: 80,
-        y0: 240
-    });
-    slider4.setSliderValue(2, 0);
-    slider4.addSlider({
-        id: 3,
-        color: "#76c7e9",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 120,
-        y0: 240
-    });
-    slider4.setSliderValue(3, 50);
-
-    slider4.addSlider({
-        id: 4,
-        color: "#ffff9a",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 160,
-        y0: 240
-    });
-    slider4.setSliderValue(4, 100);
-
-    slider4.addSlider({
-        id: 5,
-        color: "#9e9e9e",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 200,
-        y0: 240
-    });
-    slider4.setSliderValue(5, 100);
-
-    slider4.addSlider({
-        id: 6,
-        color: "#bcf5bc",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 240,
-        y0: 240
-    });
-    slider4.setSliderValue(5, 100);
-
-    slider4.addSlider({
-        id: 7,
-        color: "#bcf5bc",
-        width: 200,
-        min: -100,
-        max: 100,
-        step: 0.1,
-        x0: 280,
-        y0: 240
-    });
-    slider4.setSliderValue(5, 100);
-
+        slider3.addSlider(t);
+        slider3.setSliderValue(i, randomInRange(-100,100));
+    }
 
 
 </script>
