@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="canvass">
-        <canvas id="myCanvas" width="500" height="300"></canvas>
+        <canvas id="myCanvas" width="320" height="300"></canvas>
     </div>
 
     <br><br>
@@ -26,7 +26,7 @@
     <br>
     <br>
     <div class="canvass">
-        <canvas id="myCanvas2" width="300" height="300"></canvas>
+        <canvas id="myCanvas2" width="320" height="300"></canvas>
     </div>
 
 
@@ -60,23 +60,18 @@
     }
 
     div.canvass {
-        /*border: dashed 2px black;*/
-        /*box-shadow: 1px 1px 10px #efefef;*/
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
         padding: 25px;
-
     }
 </style>
 
 
-<script src="slider.js"></script>
+<script src="slider-circular.js"></script>
 <script>
     
-    var slider = new Slider("myCanvas", true);
+    var slider = new Slider({canvasId: "myCanvas", continuousMode: true});
     slider.addSlider({
         id: 1,
-        container: "myCanvas",
         radius: 50,
         min: -50,
         max: 50,
@@ -89,7 +84,6 @@
     slider.setSliderValue(1, 34);
     slider.addSlider({
         id: 2,
-        container: "myCanvas",
         radius: 90,
         min: -100,
         max: 100,
@@ -102,7 +96,6 @@
     slider.setSliderValue(2, 70);
     slider.addSlider({
         id: 3,
-        container: "myCanvas",
         radius: 130,
         min: 0,
         max: 360,
@@ -114,10 +107,9 @@
     });
     slider.setSliderValue(3, 307);
 
-    var slider2 = new Slider("myCanvas2");
+    var slider2 = new Slider({canvasId: "myCanvas2"});
     slider2.addSlider({
         id: 1,
-        container: "myCanvas2",
         radius: 90,
         min: 0,
         max: 30,
@@ -130,7 +122,6 @@
 
     slider2.addSlider({
         id: 3,
-        container: "myCanvas2",
         radius: 130,
         min: -1,
         max: 1,

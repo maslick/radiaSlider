@@ -1,4 +1,4 @@
-function Slider(canvasId, contMode, x0, y0) {
+function Slider(options) {
 
     this.sliders = {};
     this.scaleWidth = 35;
@@ -8,14 +8,14 @@ function Slider(canvasId, contMode, x0, y0) {
     this.startAngle = 1.5 * Math.PI + 0.000001;
     this.endAngle = 1.5 * Math.PI - 0.000001;
 
-    this.continuousMode = contMode || false;
+    this.continuousMode = options.continuousMode || false;
 
-    this.container = document.getElementById(canvasId);
+    this.container = document.getElementById(options.canvasId);
     this.the_body = document.body;
     this.context = this.container.getContext('2d');
 
-    this.x0 = x0 == undefined ? this.container.width / 2 : x0;
-    this.y0 = y0 == undefined ? this.container.height / 2 : y0;
+    this.x0 = options.x0 == undefined ? this.container.width / 2 : options.x0;
+    this.y0 = options.y0 == undefined ? this.container.height / 2 : options.y0;
 
     this.MouseX = 0;
     this.MouseY = 0;
