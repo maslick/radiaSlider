@@ -49,7 +49,7 @@ a simple pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```
 <script>
-  var slider = new Slider({canvasId: "myCanvas0",  continuousMode: true,  vertical: false});
+  var slider = new Slider({canvasId: "myCanvas",  continuousMode: true,  vertical: false});
   slider.addSlider({
     id: 1,
     width: 50,
@@ -58,7 +58,7 @@ a simple pure JavaScript circular/linear knob-style slider
     step: 5,
     color: "#104b63",
     changed: function (v) {
-      document.getElementById('value1').innerHTML = "Angle: " + v.deg + " deg, value: " + v.value;
+      document.getElementById('value1').innerHTML = "Width: " + v.width + " px, value: " + v.value;
     },
     x0: 30
     y0: 30
