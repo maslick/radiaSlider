@@ -1,15 +1,17 @@
 # =radiaSlider=
 a simple pure JavaScript circular/linear knob-style slider
 
+```
+ * works on desktop, mobile and tablets
+ * minified ~5 Kb
+```
+
 ![alt tag](screenshot.png?raw=true "radioSlider circular")
 
 ![alt tag](screenshot2.png?raw=true "radioSlider linear vertical")
 ![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")
 
-```
- * works on desktop, mobile and tablets
- * minified ~5 Kb
-```
+
 ###quickstart
 - create a canvas and the value field
 ```
