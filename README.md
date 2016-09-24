@@ -72,7 +72,7 @@ slider.setSliderValue(<sliderId>, <value>);
 ```
 
 ###demo 
-http://maslick.neocities.org/slider/
+http://maslick.neocities.org/slider-circular/
 
 http://maslick.neocities.org/slider-linear/
 
