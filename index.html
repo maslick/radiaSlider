@@ -90,7 +90,7 @@
 <script src="slider.js"></script>
 <script>
     
-    var slider = new Slider("myCanvas", true);
+    var slider = new Slider({canvasId: "myCanvas", continuousMode: true, vertical: false});
     slider.addSlider({
         id: 1,
         color: "#104b63",
@@ -182,7 +182,7 @@
 
 
 
-    var slider2 = new Slider("myCanvas2");
+    var slider2 = new Slider({canvasId: "myCanvas2", continuousMode: false, vertical: false});
     slider2.addSlider({
         id: 1,
         color: "#104b63",
@@ -244,7 +244,7 @@
 
 
 
-    var slider3 = new Slider("myCanvas3", true, true);
+    var slider3 = new Slider({canvasId: "myCanvas3", continuousMode: true, vertical: true});
     slider3.addSlider({
         id: 1,
         color: "#104b63",
@@ -351,7 +351,7 @@
 
 
 
-    var slider4 = new Slider("myCanvas4", false, true);
+    var slider4 = new Slider({canvasId: "myCanvas4", continuousMode: false, vertical: true});
     slider4.addSlider({
         id: 1,
         color: "#104b63",

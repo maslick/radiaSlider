@@ -1,14 +1,14 @@
-function Slider(canvasId, continuousMode, vertical) {
+function Slider(options) {
 
     this.sliders = {};
     this.scaleWidth = 35;
     this.fillWidth = 35;
     this.knobWidth = 35;
 
-    this.continuousMode = continuousMode || false;
-    this.vertical = vertical || false;
+    this.continuousMode = options.continuousMode || false;
+    this.vertical = options.vertical || false;
 
-    this.container = document.getElementById(canvasId);
+    this.container = document.getElementById(options.canvasId);
     this.the_body = document.body;
     this.context = this.container.getContext('2d');
 
