@@ -69,7 +69,8 @@ a simple pure JavaScript circular/linear knob-style slider
 slider.setSliderValue(<sliderId>, <value>);
 ```
 
-###demo 
+###demo
+
 http://maslick.neocities.org/slider-circular/
 
 http://maslick.neocities.org/slider-linear/
