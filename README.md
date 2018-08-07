@@ -10,13 +10,13 @@ a simple pure JavaScript circular/linear knob-style slider
 ![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")
 
 
-###quickstart
+### quickstart
 - create a canvas and the value field
 ```
 <canvas id="myCanvas" width="300" height="300"></canvas>
 <span id="value1"></span>
 ```
-####circular
+#### circular
 - import js
 ```
 <script src="slider-circular.min.js"></script>
@@ -69,7 +69,7 @@ a simple pure JavaScript circular/linear knob-style slider
 slider.setSliderValue(<sliderId>, <value>);
 ```
 
-###demo
+### demo
 
 http://maslick.neocities.org/slider-circular/
 
