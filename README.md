@@ -5,13 +5,14 @@ a simple pure JavaScript circular/linear knob-style slider
 [![npm bundle size (minified)](https://img.shields.io/badge/minified-5.5Kb-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 
 
+
 ```
  * works on desktop, mobile and tablets
  * minified ~5 Kb
 ```
 
-![alt tag](screenshot.png?raw=true "radioSlider circular")
-![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")
+[![alt tag](screenshot.png?raw=true "radioSlider circular")](http://maslick.neocities.org/slider-circular/)
+[![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")](http://maslick.neocities.org/slider-linear/)
 
 
 ### quickstart
@@ -78,4 +79,3 @@ slider.setSliderValue(<sliderId>, <value>);
 http://maslick.neocities.org/slider-circular/
 
 http://maslick.neocities.org/slider-linear/
-
