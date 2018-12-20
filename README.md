@@ -8,7 +8,7 @@ a simple pure JavaScript circular/linear knob-style slider
 
 ```
  * works on desktop, mobile and tablets
- * minified ~5 Kb
+ * minified ~6 Kb
 ```
 
 [![alt tag](screenshot.png?raw=true "radioSlider circular")](http://maslick.neocities.org/slider-circular/)
