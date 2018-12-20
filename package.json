@@ -1,0 +1,24 @@
+{
+  "name": "@maslick/radiaslider",
+  "version": "1.0.1",
+  "description": "nice looking canvas-based radial and linear slider",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maslick/radiaSlider.git"
+  },
+  "keywords": [
+    "radial",
+    "circular",
+    "slider",
+    "js",
+    "javascript",
+    "es5"
+  ],
+  "author": "Pavel Maslov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maslick/radiaSlider/issues"
+  },
+  "homepage": "https://github.com/maslick/radiaSlider#readme"
+}
