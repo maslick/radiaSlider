@@ -34,7 +34,7 @@ a simple pure JavaScript circular/linear knob-style slider
 ### Circular slider
 
 - import js
-```js
+```html
 <script src="slider-circular.min.js"></script>
 ```
  - initialize a slider
@@ -58,7 +58,7 @@ a simple pure JavaScript circular/linear knob-style slider
 ### Linear slider
 
 - import js
-```
+```html
 <script src="slider-linear.min.js"></script>
 ```
  - initialize a slider
