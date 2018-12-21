@@ -16,13 +16,13 @@ a simple pure JavaScript circular/linear knob-style slider
  * pure JavaScript (ECMAScript 5.1)
 ```
 
-[![alt tag](screenshot.png?raw=true "radioSlider circular")](http://maslick.neocities.org/slider-circular/)
-[![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")](http://maslick.neocities.org/slider-linear/)
+[![alt tag](screenshot.png?raw=true "radioSlider circular")](https://maslick.github.io/radiaSlider/circular/)
+[![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")](https://maslick.github.io/radiaSlider/linear/)
 
 
 ## Demo
 
-[Circular](http://maslick.neocities.org/slider-circular/) / [linear](http://maslick.neocities.org/slider-linear/)
+[Circular](https://maslick.github.io/radiaSlider/circular/) / [linear](https://maslick.github.io/radiaSlider/linear/)
 
 
 ## Quickstart
