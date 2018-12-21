@@ -97,6 +97,8 @@ slider.sliders[<sliderId>].endAngle            // current angle in radians (circ
 slider.sliders[<sliderId>].value               // current width in pixels  (linear only)
 ```
 
+![alt tag](screenshot4.png?raw=true "radioSlider karandashi")
+
 ## License
 
 This project is licenced under the [MIT License](http://opensource.org/licenses/mit-license.html).
