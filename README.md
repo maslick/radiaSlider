@@ -1,33 +1,43 @@
 # =radiaSlider=
 [![npm (scoped)](https://img.shields.io/npm/v/@maslick/radiaslider.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm bundle size (minified)](https://img.shields.io/badge/minified-6Kb-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
+[![npm no dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 a simple pure JavaScript circular/linear knob-style slider
-
 
 
 ```
  * works on desktop, mobile and tablets
  * minified ~6 Kb
+ * pure JavaScript (ECMAScript 5.1)
+ * no dependencies
 ```
 
 [![alt tag](screenshot.png?raw=true "radioSlider circular")](http://maslick.neocities.org/slider-circular/)
 [![alt tag](screenshot3.png?raw=true "radioSlider linear horizontal")](http://maslick.neocities.org/slider-linear/)
 
 
-### quickstart
+## Demo
+
+[Circular](http://maslick.neocities.org/slider-circular/) / [linear](http://maslick.neocities.org/slider-linear/)
+
+
+## Quickstart
+
 - create a canvas and the value field
 ```
 <canvas id="myCanvas" width="300" height="300"></canvas>
 <span id="value1"></span>
 ```
-#### circular
+### Circular slider
+
 - import js
-```
+```js
 <script src="slider-circular.min.js"></script>
 ```
  - initialize a slider
-```
+```js
 <script>
   var slider = new Slider({canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150});
   slider.addSlider({
@@ -44,13 +54,14 @@ a simple pure JavaScript circular/linear knob-style slider
 </script>
 ```
 
-#### linear
+### Linear slider
+
 - import js
 ```
 <script src="slider-linear.min.js"></script>
 ```
  - initialize a slider
-```
+```js
 <script>
   var slider = new Slider({canvasId: "myCanvas",  continuousMode: true,  vertical: false});
   slider.addSlider({
@@ -70,12 +81,10 @@ a simple pure JavaScript circular/linear knob-style slider
 ```
 
 - if you want to change the value programmatically, use:
-```
+```js
 slider.setSliderValue(<sliderId>, <value>);
 ```
 
-### demo
+## License
 
-http://maslick.neocities.org/slider-circular/
-
-http://maslick.neocities.org/slider-linear/
+This project is licenced under the [MIT License](http://opensource.org/licenses/mit-license.html).
