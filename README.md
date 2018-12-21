@@ -27,7 +27,7 @@ a simple pure JavaScript circular/linear knob-style slider
 ## Quickstart
 
 - create a canvas and the value field
-```
+```html
 <canvas id="myCanvas" width="300" height="300"></canvas>
 <span id="value1"></span>
 ```
