@@ -40,7 +40,7 @@ a simple pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  var slider = new Slider({canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150});
+  var slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150 });
   slider.addSlider({
     id: 1,
     radius: 50,
@@ -64,7 +64,7 @@ a simple pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  var slider = new Slider({canvasId: "myCanvas",  continuousMode: true,  vertical: false});
+  var slider = new Slider({ canvasId: "myCanvas",  continuousMode: true,  vertical: false });
   slider.addSlider({
     id: 1,
     width: 50,
@@ -81,9 +81,19 @@ a simple pure JavaScript circular/linear knob-style slider
 </script>
 ```
 
-- if you want to change the value programmatically, use:
+## Get/set value programmatically
+
+If you want to change the value programmatically, use:
 ```js
 slider.setSliderValue(<sliderId>, <value>);
+```
+
+To get the current value:
+```js
+slider.sliders[<sliderId>].normalizedValue     // current value
+slider.sliders[<sliderId>].ang_degrees         // current angle in degrees (circular only)
+slider.sliders[<sliderId>].endAngle            // current angle in radians (circular only)
+slider.sliders[<sliderId>].value               // current width in pixels  (linear only)
 ```
 
 ## License
