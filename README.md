@@ -6,12 +6,13 @@
 
 a simple pure JavaScript circular/linear knob-style slider
 
+## Features
 
 ```
  * works on desktop, mobile and tablets
- * minified ~6 Kb
- * pure JavaScript (ECMAScript 5.1)
+ * small size (minified ~6 Kb)
  * no dependencies
+ * pure JavaScript (ECMAScript 5.1)
 ```
 
 [![alt tag](screenshot.png?raw=true "radioSlider circular")](http://maslick.neocities.org/slider-circular/)
