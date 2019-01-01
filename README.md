@@ -5,7 +5,7 @@
 [![npm download count](https://img.shields.io/npm/dt/@maslick/radiaslider.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-a simple pure JavaScript circular/linear knob-style slider
+a pure JavaScript circular/linear knob-style slider
 
 ## Features
 
@@ -13,7 +13,7 @@ a simple pure JavaScript circular/linear knob-style slider
  * works on desktop, mobile and tablets
  * small size (minified ~6 Kb)
  * no dependencies
- * pure JavaScript (ECMAScript 5.1)
+ * pure JavaScript (ES5)
 ```
 
 [![alt tag](screenshot.png?raw=true "radioSlider circular")](https://maslick.github.io/radiaSlider/circular/)
