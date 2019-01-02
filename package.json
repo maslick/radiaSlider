@@ -1,12 +1,16 @@
 {
   "name": "@maslick/radiaslider",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "nice looking canvas-based radial and linear slider",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maslick/radiaSlider.git"
   },
+  "files": [
+    "circular/*.js",
+    "linear/*.js"
+  ],
   "keywords": [
     "roundslider",
     "round slider",
