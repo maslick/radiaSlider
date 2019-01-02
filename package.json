@@ -1,8 +1,7 @@
 {
   "name": "@maslick/radiaslider",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "nice looking canvas-based radial and linear slider",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maslick/radiaSlider.git"
