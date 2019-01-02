@@ -2,7 +2,7 @@
 [![npm (scoped)](https://img.shields.io/npm/v/@maslick/radiaslider.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm bundle size (minified)](https://img.shields.io/badge/minified-6Kb-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm no dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
-[![npm download count](https://img.shields.io/npm/dt/@maslick/radiaslider.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
+[![npm download count](https://img.shields.io/npm/dt/@maslick/radiaslider.svg)](https://npmcharts.com/compare/@maslick/radiaslider?minimal=true)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 a pure JavaScript circular/linear knob-style slider

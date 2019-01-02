@@ -238,13 +238,15 @@ Slider.prototype.getSelectedSlider = function () {
     for (var key in this.sliders) {
         if (!this.sliders.hasOwnProperty(key)) continue;
         var obj = this.sliders[key];
+        var xx;
+        var yy;
         if (this.vertical) {
-            var xx = this.MouseX >= obj.x0 - this.scaleWidth / 2 && this.MouseX <= obj.x0 + this.scaleWidth / 2;
-            var yy = this.MouseY >= obj.y0 - obj.width - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
+            xx = this.MouseX >= obj.x0 - this.scaleWidth / 2 && this.MouseX <= obj.x0 + this.scaleWidth / 2;
+            yy = this.MouseY >= obj.y0 - obj.width - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
         }
         else {
-            var xx = this.MouseX >= obj.x0 - this.scaleWidth/2 && this.MouseX <= obj.x0 + obj.width + this.scaleWidth/2;
-            var yy = this.MouseY >= obj.y0 - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
+            xx = this.MouseX >= obj.x0 - this.scaleWidth/2 && this.MouseX <= obj.x0 + obj.width + this.scaleWidth/2;
+            yy = this.MouseY >= obj.y0 - this.scaleWidth/2 && this.MouseY <= obj.y0 + this.scaleWidth/2;
         }
 
         if (xx && yy) {
@@ -278,9 +280,8 @@ Slider.prototype._handleClick = function (event) {
     this.selectedSlider = this.getSelectedSlider();
 
 
-    if (this.currentSlider && this.getSelectedSlider() && this.currentSlider.id != this.getSelectedSlider().id) {
+    if (this.currentSlider && this.getSelectedSlider() && this.currentSlider.id !== this.getSelectedSlider().id) {
         return;
-        this._rotation();
     }
 
     if (this.selectedSlider) {

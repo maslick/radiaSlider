@@ -14,8 +14,8 @@ function Slider(options) {
     this.the_body = document.body;
     this.context = this.container.getContext('2d');
 
-    this.x0 = options.x0 == undefined ? this.container.width / 2 : options.x0;
-    this.y0 = options.y0 == undefined ? this.container.height / 2 : options.y0;
+    this.x0 = options.x0 === undefined ? this.container.width / 2 : options.x0;
+    this.y0 = options.y0 === undefined ? this.container.height / 2 : options.y0;
 
     this.MouseX = 0;
     this.MouseY = 0;
@@ -188,7 +188,7 @@ Slider.prototype.radToDeg = function (ang) {
     return ang * 180 / Math.PI;
 };
 
-// Normilizes tangent
+// Normalizes tangent
 Slider.prototype.normalizeTan = function (ang) {
     var rads = ang + Math.PI / 2 > 0 ? ang + Math.PI / 2 : (2 * Math.PI + ang + Math.PI / 2);
     return rads;
@@ -246,7 +246,7 @@ Slider.prototype._handleMouseUp = function (event) {
 Slider.prototype._handleClick = function (event) {
     this.selectedSlider = this.getSelectedSlider();
 
-    if (this.currentSlider && this.getSelectedSlider() && this.currentSlider.id != this.getSelectedSlider().id) {
+    if (this.currentSlider && this.getSelectedSlider() && this.currentSlider.id !== this.getSelectedSlider().id) {
         return;
     }
     if (this.selectedSlider) {
