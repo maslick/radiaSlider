@@ -1,6 +1,6 @@
 {
   "name": "@maslick/radiaslider",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "nice looking canvas-based radial and linear slider",
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
     "circularslider",
     "circular slider",
     "radial slider",
+    "linear slider",
     "knob slider",
     "range slider",
     "range",
@@ -28,7 +29,9 @@
     "slider",
     "js",
     "javascript",
-    "es5"
+    "es5",
+    "browser",
+    "client"
   ],
   "author": "Pavel Maslov",
   "license": "MIT",
