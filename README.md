@@ -16,8 +16,7 @@ a pure JavaScript circular/linear knob-style slider
  * pure JavaScript (ES5)
 ```
 
-[![alt tag](img/screenshot1.png?raw=true "radioSlider circular")](https://maslick.github.io/radiaSlider/circular/)
-[![alt tag](img/screenshot3.png?raw=true "radioSlider linear horizontal")](https://maslick.github.io/radiaSlider/linear/)
+[![screenshot](img/radiaslider.jpg?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/circular/)
 
 
 ## Demo
