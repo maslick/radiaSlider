@@ -14,7 +14,7 @@ a pure JavaScript circular/linear knob-style slider
  * small size (minified ~6 Kb)
  * no dependencies
  * pure JavaScript (ES5)
- * Node.js friendly
+ * browser and Node.js friendly
 ```
 
 [![screenshot](img/radiaslider.jpg?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/circular/)
