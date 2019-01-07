@@ -14,6 +14,7 @@ a pure JavaScript circular/linear knob-style slider
  * small size (minified ~6 Kb)
  * no dependencies
  * pure JavaScript (ES5)
+ * Node.js friendly
 ```
 
 [![screenshot](img/radiaslider.jpg?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/circular/)
@@ -66,7 +67,7 @@ a pure JavaScript circular/linear knob-style slider
 <script>
   var slider = new Slider({ canvasId: "myCanvas",  continuousMode: true,  vertical: false });
   slider.addSlider({
-    id: 1,
+    id: 1
     width: 50,
     min: 0,
     max: 30,
@@ -97,6 +98,9 @@ slider.sliders[<sliderId>].value               // current width in pixels  (line
 ```
 
 ![alt tag](img/screenshot4.png?raw=true "radioSlider karandashi")
+
+## Using Node.js
+Radiaslider can be used either in browser or as a Node.js module. Look for a React.js example [here](https://github.com/maslick/react-radiaslider).
 
 ## License
 
