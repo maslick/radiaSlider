@@ -291,8 +291,6 @@
     };
 
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
-        module.exports = 1;
+        module.exports = Slider;
     else window.Slider = Slider;
 })();
-
-
