@@ -1,0 +1,20 @@
+html {
+    display: table;
+    margin: 25px auto;
+    text-align: center;
+
+}
+
+div.dashboard {
+    color: white;
+    border-radius: 7px;
+    padding: 5px 5px;
+    width: 280px;
+    margin: 5px auto;
+    font-family: monospace;
+}
+
+div.canvass {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 25px;
+}

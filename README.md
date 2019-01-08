@@ -17,12 +17,12 @@ a pure JavaScript circular/linear knob-style slider
  * browser and Node.js friendly
 ```
 
-[![screenshot](img/radiaslider.jpg?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/circular/)
+[![screenshot](img/radiaslider.jpg?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/demo/circular.html)
 
 
 ## Demo
 
-[Circular](https://maslick.github.io/radiaSlider/circular/) / [linear](https://maslick.github.io/radiaSlider/linear/)
+[Circular](https://maslick.github.io/radiaSlider/demo/circular.html) / [linear](https://maslick.github.io/radiaSlider/demo/linear.html)
 
 
 ## Quickstart
@@ -100,7 +100,7 @@ slider.sliders[<sliderId>].value               // current width in pixels  (line
 ![alt tag](img/screenshot4.png?raw=true "radioSlider karandashi")
 
 ## Using Node.js
-Radiaslider can be used either in browser or as a Node.js module. Look for a React.js example [here](https://github.com/maslick/react-radiaslider).
+*Radia slider* can be used either in the Browser or in the Node.js environment. Look for the [browser](https://github.com/maslick/radiaSlider/tree/master/example) and [React.js](https://github.com/maslick/react-radiaslider) examples.
 
 ## License
 
