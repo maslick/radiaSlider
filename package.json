@@ -1,6 +1,6 @@
 {
   "name": "@maslick/radiaslider",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "nice looking canvas-based radial and linear slider",
   "repository": {
     "type": "git",
@@ -8,8 +8,10 @@
   },
   "main": "index.js",
   "files": [
-    "circular/*.js",
-    "linear/*.js",
+    "src/*",
+    "dist/*.js",
+    "example/*",
+    "index.js",
     "README.md",
     "LICENSE",
     "package.json"
