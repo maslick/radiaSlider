@@ -7,10 +7,9 @@ html {
 
 div.dashboard {
     color: white;
-    border-radius: 7px;
     padding: 5px 5px;
     width: 280px;
-    margin: 5px auto;
+    margin: 0 auto;
     font-family: monospace;
 }
 
