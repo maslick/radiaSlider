@@ -13,7 +13,7 @@ a pure JavaScript circular/linear knob-style slider
  * works on desktop, mobile and tablets
  * small size (minified ~6 Kb)
  * no dependencies
- * pure JavaScript (ES5)
+ * pure JavaScript (ES6)
  * browser and Node.js friendly
 ```
 
@@ -41,7 +41,7 @@ a pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  var slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150 });
+  let slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150 });
   slider.addSlider({
     id: 1,
     radius: 50,
@@ -65,7 +65,7 @@ a pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  var slider = new Slider({ canvasId: "myCanvas",  continuousMode: true,  vertical: false });
+  let slider = new Slider({ canvasId: "myCanvas",  continuousMode: true,  vertical: false });
   slider.addSlider({
     id: 1
     width: 50,
