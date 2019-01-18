@@ -104,15 +104,15 @@ slider.sliders[<sliderId>].value               // current width in pixels  (line
 
 ```js
 // ES6 syntax
-import CircularSlider from "@maslick/radiaslider";  // circular
-import LinearSlider from "@maslick/radiaslider/src/slider-linear";  // linear
+import CircularSlider from "@maslick/radiaslider";
+import LinearSlider from "@maslick/radiaslider/src/slider-linear";
 
-// node.js syntax
-const Circular = require("@maslick/radiaslider");
-const Linear = require("@maslick/radiaslider/src/slider-linear");
+// Node.js syntax
+const CircularSlider = require("@maslick/radiaslider");
+const LinearSlider = require("@maslick/radiaslider/src/slider-linear");
 
-const circular = new Circular({...});
-const linear = new Linear({...});
+const circular = new CircularSlider({...});
+const linear = new LinearSlider({...});
 ```
 
 For a React.js example check out [this project](https://github.com/maslick/react-radiaslider).
