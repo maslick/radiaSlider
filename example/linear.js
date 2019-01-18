@@ -1,4 +1,4 @@
-import { linear as Slider } from "../index"
+import Slider from "../src/slider-linear";
 
 var colors = [
     "#104b63",

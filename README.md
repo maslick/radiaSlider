@@ -1,6 +1,6 @@
 # =radiaSlider=
 [![npm (scoped)](https://img.shields.io/npm/v/@maslick/radiaslider.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
-[![npm bundle size (minified)](https://img.shields.io/badge/minified-6Kb-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
+[![npm bundle size (minified)](https://img.shields.io/badge/minified-5Kb-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm no dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm download count](https://img.shields.io/npm/dt/@maslick/radiaslider.svg)](https://npmcharts.com/compare/@maslick/radiaslider?minimal=true)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -11,7 +11,7 @@ a pure JavaScript circular/linear knob-style slider
 
 ```
  * works on desktop, mobile and tablets
- * small size (minified ~6 Kb)
+ * small size (minified ~5 Kb)
  * no dependencies
  * pure JavaScript (ES6)
  * browser and Node.js friendly
@@ -41,7 +41,7 @@ a pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  let slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150 });
+  const slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150 });
   slider.addSlider({
     id: 1,
     radius: 50,
@@ -65,7 +65,7 @@ a pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  let slider = new Slider({ canvasId: "myCanvas",  continuousMode: true,  vertical: false });
+  const slider = new Slider({ canvasId: "myCanvas",  continuousMode: true,  vertical: false });
   slider.addSlider({
     id: 1
     width: 50,
@@ -100,7 +100,22 @@ slider.sliders[<sliderId>].value               // current width in pixels  (line
 ![alt tag](img/screenshot4.png?raw=true "radioSlider karandashi")
 
 ## Using Node.js
-*Radia slider* can be used either in the [Browser](https://github.com/maslick/radiaSlider/tree/master/dist) or in the [Node.js](https://github.com/maslick/radiaSlider/tree/master/example) environment. For a React.js example look [here](https://github.com/maslick/react-radiaslider).
+*Radia slider* can be used either in the [Browser](https://github.com/maslick/radiaSlider/tree/master/dist) or in the [Node.js](https://github.com/maslick/radiaSlider/tree/master/example) environment.
+
+```js
+// ES6 syntax
+import CircularSlider from "@maslick/radiaslider";  // circular
+import LinearSlider from "@maslick/radiaslider/src/slider-linear";  // linear
+
+// node.js syntax
+const Circular = require("@maslick/radiaslider");
+const Linear = require("@maslick/radiaslider/src/slider-linear");
+
+const circular = new Circular({...});
+const linear = new Linear({...});
+```
+
+For a React.js example check out [this project](https://github.com/maslick/react-radiaslider).
 
 ## License
 

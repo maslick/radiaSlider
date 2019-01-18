@@ -1,4 +1,4 @@
-import { circular as Slider } from "../index"
+import Slider from "../src/slider-circular";
 
 var slider = new Slider({canvasId: "myCanvas", continuousMode: true});
 slider.addSlider({
