@@ -100,7 +100,7 @@ slider.sliders[<sliderId>].value               // current width in pixels  (line
 ![alt tag](img/screenshot4.png?raw=true "radioSlider karandashi")
 
 ## Using Node.js
-*Radia slider* can be used either in the [Browser](https://github.com/maslick/radiaSlider/tree/master/dist) or in the [Node.js](https://github.com/maslick/radiaSlider/tree/master/example) environment.
+*Radia slider* can be used either in the [Browser](https://github.com/maslick/radiaSlider/tree/master/dist) or in the Node.js environment.
 
 ```js
 // ES6 syntax
