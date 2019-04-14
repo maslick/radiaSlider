@@ -13,10 +13,12 @@
 
             this.container = document.getElementById(options.canvasId);
             this.the_body = document.body;
-            this.context = this.container.getContext('2d');
+            this.context = Slider.setupHiDpiCanvas(this.container);
 
             this.x0 = options.x0 === undefined ? this.container.width / 2 : options.x0;
             this.y0 = options.y0 === undefined ? this.container.height / 2 : options.y0;
+            this.x0 /= window.devicePixelRatio || 1;
+            this.y0 /= window.devicePixelRatio || 1;
 
             this.MouseX = 0;
             this.MouseY = 0;
@@ -33,6 +35,36 @@
             this.container.addEventListener('touchstart', this._handleTouch.bind(this), false);
             this.container.addEventListener('touchmove', this._handleMove.bind(this), false);
             this.container.addEventListener('touchend', this._handleEnd.bind(this), false);
+        }
+
+        static setupHiDpiCanvas(canvas) {
+            let ctx = canvas.getContext('2d');
+            let devicePixelRatio = window.devicePixelRatio || 1;
+            let backingStoreRatio =
+                ctx.webkitBackingStorePixelRatio ||
+                ctx.mozBackingStorePixelRatio ||
+                ctx.msBackingStorePixelRatio ||
+                ctx.oBackingStorePixelRatio ||
+                ctx.backingStorePixelRatio || 1;
+
+            let ratio = devicePixelRatio / backingStoreRatio;
+            // upscale the canvas if the two ratios don't match
+            if (devicePixelRatio !== backingStoreRatio) {
+                let oldWidth = canvas.width;
+                let oldHeight = canvas.height;
+
+                canvas.width = oldWidth * ratio;
+                canvas.height = oldHeight * ratio;
+
+                canvas.style.width = oldWidth + 'px';
+                canvas.style.height = oldHeight + 'px';
+
+                // now scale the context to counter
+                // the fact that we've manually scaled
+                // our canvas element
+                ctx.scale(ratio, ratio);
+            }
+            return ctx;
         }
 
         // Adds a slider band to the slider
