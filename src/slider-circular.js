@@ -2,7 +2,7 @@
     class Slider {
         constructor(options) {
             this.sliders = {};
-            this.scaleWidth = 35;
+            this.scaleWidth = 34;
             this.fillWidth = 35;
             this.knobWidth = 35;
 
