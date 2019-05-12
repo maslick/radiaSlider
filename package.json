@@ -1,6 +1,6 @@
 {
   "name": "@maslick/radiaslider",
-  "version": "1.6.1",
+  "version": "1.8.0",
   "description": "nice looking canvas-based radial and linear slider",
   "repository": {
     "type": "git",
@@ -51,9 +51,10 @@
     "parcel": "^1.12.3"
   },
   "scripts": {
-    "build": "minify src/slider-circular.js --out-file dist/slider-circular.min.js && minify src/slider-linear.js --out-file dist/slider-linear.min.js",
-    "build-demo": "parcel build example/* --public-url ./ --out-dir demo/",
     "test-circular": "parcel example/circular.html -d test",
-    "test-linear": "parcel example/linear.html -d test"
+    "test-linear": "parcel example/linear.html -d test",
+    "browser": "mkdir -p dist && minify src/slider-circular.js --out-file dist/slider-circular.min.js && minify src/slider-linear.js --out-file dist/slider-linear.min.js",
+    "demo": "parcel build example/* --public-url ./ --out-dir demo/",
+    "build": "npm run browser && npm run demo"
   }
 }

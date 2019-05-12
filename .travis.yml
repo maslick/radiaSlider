@@ -1,0 +1,11 @@
+language: node_js
+
+before_deploy: "npm build"
+
+deploy:
+  provider: npm
+  email: pavel.masloff@gmail.com
+  api_key: $NPM_API_KEY
+  on:
+    repo: maslick/radiaSlider
+    branch: master
