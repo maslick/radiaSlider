@@ -3,7 +3,7 @@ https://github.com/maslick/radiaSlider/issues/new
 
 ## 2. Fork the repo
 ```
-git clone https://github.com/maslick/radiaSlider.git
+git clone https://github.com/<YOUR-USER>/radiaSlider.git
 ```
 
 ## 3. Update your fork
