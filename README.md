@@ -116,7 +116,3 @@ const linear = new LinearSlider({...});
 ```
 
 For a React.js example check out [this project](https://github.com/maslick/react-radiaslider).
-
-## License
-
-This project is licenced under the [MIT License](http://opensource.org/licenses/mit-license.html).
