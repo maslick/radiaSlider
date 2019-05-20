@@ -23,7 +23,7 @@ a pure JavaScript circular/linear knob-style slider
 
 ## Demo
 
-[Circular](https://maslick.github.io/radiaSlider/demo/circular.html) / [linear](https://maslick.github.io/radiaSlider/demo/linear.html)
+[Circular](https://maslick.github.io/radiaSlider/demo/circular.html) / [linear](https://maslick.github.io/radiaSlider/demo/linear.html) / [react.js](https://maslick.github.io/react-radiaslider/demo/)
 
 
 ## Quickstart
