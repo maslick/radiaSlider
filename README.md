@@ -1,5 +1,6 @@
 # =radiaSlider=
 [![npm (scoped)](https://img.shields.io/npm/v/@maslick/radiaslider.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
+[![Build Status](https://travis-ci.org/maslick/radiaSlider.svg?branch=master)](https://travis-ci.org/maslick/radiaSlider)
 [![npm bundle size (minified)](https://img.shields.io/badge/minified-5Kb-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm no dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://www.npmjs.com/package/@maslick/radiaslider)
 [![npm download count](https://img.shields.io/npm/dt/@maslick/radiaslider.svg)](https://npmcharts.com/compare/@maslick/radiaslider?minimal=true)
