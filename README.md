@@ -18,7 +18,7 @@ a pure JavaScript circular/linear knob-style slider
  * browser and Node.js friendly
 ```
 
-[![screenshot](img/radiaslider.jpg?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/demo/circular.html)
+[![screenshot](img/radiaslider.png?raw=true "radiaSlider circular")](https://maslick.github.io/radiaSlider/demo/circular.html)
 
 
 ## Demo
@@ -98,7 +98,7 @@ slider.sliders[<sliderId>].endAngle            // current angle in radians (circ
 slider.sliders[<sliderId>].value               // current width in pixels  (linear only)
 ```
 
-![alt tag](img/screenshot4.png?raw=true "radioSlider karandashi")
+![alt tag](img/screenshot1.png?raw=true "radioSlider karandashi")
 
 ## Using Node.js
 *Radia slider* can be used either in the [Browser](https://github.com/maslick/radiaSlider/tree/master/dist) or in the Node.js environment.
