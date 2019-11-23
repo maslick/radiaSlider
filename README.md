@@ -42,7 +42,7 @@ a pure JavaScript circular/linear knob-style slider
  - initialize a slider
 ```js
 <script>
-  const slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150 });
+  const slider = new Slider({ canvasId: "myCanvas", continuousMode: true, x0: 150, y0: 150, readOnly: false });
   slider.addSlider({
     id: 1,
     radius: 50,

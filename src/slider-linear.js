@@ -19,15 +19,17 @@
             this.selectedSlider = null;
             this.currentSlider = null;
 
-            this.rotationEventListener = this._rotation.bind(this);
-            this.container.addEventListener('mousedown', this._handleMouseDown.bind(this), false);
-            this.the_body.addEventListener('mouseup', this._handleMouseUp.bind(this), false);
-            this.container.addEventListener('click', this._handleClick.bind(this), false);
+            this.readOnly = options.readOnly || false;
+            if (!this.readOnly) {
+                this.rotationEventListener = this._rotation.bind(this);
+                this.container.addEventListener('mousedown', this._handleMouseDown.bind(this), false);
+                this.the_body.addEventListener('mouseup', this._handleMouseUp.bind(this), false);
+                this.container.addEventListener('click', this._handleClick.bind(this), false);
 
-
-            this.container.addEventListener('touchstart', this._handleTouch.bind(this), false);
-            this.container.addEventListener('touchmove', this._handleMove.bind(this), false);
-            this.container.addEventListener('touchend', this._handleEnd.bind(this), false);
+                this.container.addEventListener('touchstart', this._handleTouch.bind(this), false);
+                this.container.addEventListener('touchmove', this._handleMove.bind(this), false);
+                this.container.addEventListener('touchend', this._handleEnd.bind(this), false);
+            }
         }
 
         static setupHiDpiCanvas(canvas) {
