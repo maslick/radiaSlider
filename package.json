@@ -54,6 +54,7 @@
     "test-linear": "parcel example/linear.html -d test",
     "browser": "mkdir -p dist && minify src/slider-circular.js --out-file dist/slider-circular.min.js && minify src/slider-linear.js --out-file dist/slider-linear.min.js",
     "demo": "npx parcel build example/* --public-url ./ --dist-dir demo/",
-    "build": "npm run browser && npm run demo"
+    "build": "npm run browser && npm run demo",
+    "test": "pwd"
   }
 }
