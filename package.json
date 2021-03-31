@@ -1,6 +1,6 @@
 {
   "name": "@maslick/radiaslider",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "description": "nice looking canvas-based radial and linear slider",
   "repository": {
     "type": "git",
@@ -46,9 +46,9 @@
   },
   "homepage": "https://github.com/maslick/radiaSlider#readme",
   "devDependencies": {
-    "babel-minify": "^0.5.0",
+    "babel-minify": "^0.5.1",
     "cssnano": "^4.1.10",
-    "parcel": "^1.12.4"
+    "parcel": "^2.0.0-beta.2"
   },
   "scripts": {
     "test-circular": "parcel example/circular.html -d test",
